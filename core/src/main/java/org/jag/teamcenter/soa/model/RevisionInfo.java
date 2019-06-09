@@ -3,6 +3,8 @@
  */
 package org.jag.teamcenter.soa.model;
 
+import com.teamcenter.services.strong.core._2008_06.DataManagement;
+
 /**
  * @author Jose A. Garcia Sanchez
  * @see DataManagement.RevInfo

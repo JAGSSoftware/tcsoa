@@ -14,7 +14,7 @@
     </build>
 
     <properties>
-        <tcsoa.version>9000.1.0</tcsoa.version>
+        <tcsoa.version>11000.2.0</tcsoa.version>
     </properties>
 
     <dependencies>
@@ -31,34 +31,29 @@
 
         <!-- System dependencies -->
         <dependency>
-            <groupId>TcSoaBomStrong</groupId>
+            <groupId>com.siemens.teamcenter.soa</groupId>
             <artifactId>TcSoaBomStrong</artifactId>
             <version>${tcsoa.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>TcSoaClient</groupId>
+            <groupId>com.siemens.teamcenter.soa</groupId>
             <artifactId>TcSoaClient</artifactId>
             <version>${tcsoa.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>TcSoaCommon</groupId>
+            <groupId>com.siemens.teamcenter.soa</groupId>
             <artifactId>TcSoaCommon</artifactId>
             <version>${tcsoa.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>TcSoaCoreStrong</groupId>
+            <groupId>com.siemens.teamcenter.soa</groupId>
             <artifactId>TcSoaCoreStrong</artifactId>
             <version>${tcsoa.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>TcSoaStrongModel</groupId>
+            <groupId>com.siemens.teamcenter.soa</groupId>
             <artifactId>TcSoaStrongModel</artifactId>
             <version>${tcsoa.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>commons-httpclient</groupId>

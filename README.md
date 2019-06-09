@@ -1,3 +1,3 @@
 # JAGS Teamcenter SOA library contribution
 
-Library to work fluently with Teamcenter 9.1 SOA Libraries
+Library to work fluently with Teamcenter 11.2.0 SOA Libraries
