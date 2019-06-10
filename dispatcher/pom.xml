@@ -17,8 +17,7 @@
         <dependency>
             <groupId>com.siemens.teamcenter.dispatcher.client</groupId>
             <artifactId>DCCore</artifactId>
-            <version>1</version>
-            <scope>provided</scope>
+            <version>v20150715</version>
         </dependency>
         <dependency>
             <groupId>org.jag.teamcenter</groupId>
