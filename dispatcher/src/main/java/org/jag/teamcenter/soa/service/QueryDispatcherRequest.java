@@ -30,7 +30,7 @@ public class QueryDispatcherRequest {
                 filter.primaryObjects(),
                 filter.tasksIds(), filter.loadData());
 
-        final List<DispatcherRequest> requests = new ArrayList<>();
+        final List<DispatcherRequest> requests = new ArrayList<>(modelObjects.length);
         for (final ModelObject modelObject : modelObjects) {
             requests.add((DispatcherRequest) modelObject);
         }

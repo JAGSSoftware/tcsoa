@@ -14,7 +14,7 @@ public class InvalidCredentialsException extends Exception {
 
 	private static final long serialVersionUID = 3677748379607133391L;
 
-	private transient final Credentials credentials;
+	private transient Credentials credentials;
 
 	/**
 	 * @param credentials

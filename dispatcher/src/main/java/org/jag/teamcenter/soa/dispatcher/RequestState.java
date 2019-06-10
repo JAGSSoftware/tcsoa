@@ -26,10 +26,7 @@ public enum RequestState {
 
     private final RequestLevel level;
 
-    /**
-     * @param state
-     */
-    private RequestState(final RequestLevel state) {
+    RequestState(final RequestLevel state) {
         this.level = state;
     }
 
@@ -54,7 +51,7 @@ public enum RequestState {
      * @return
      */
     public static synchronized String[] findStateByLevelToString(final RequestLevel level) {
-        final List<String> states = new ArrayList<>();
+        final List<String> states = new ArrayList<>(values().length);
 
         for (final RequestState state : findStateByLevel(level)) {
             states.add(state.toString());
@@ -84,7 +81,7 @@ public enum RequestState {
      * @return
      */
     public static synchronized String[] findStateNotByLevelToString(final RequestLevel level) {
-        final List<String> states = new ArrayList<>();
+        final List<String> states = new ArrayList<>(values().length);
 
         for (final RequestState state : findStateNotByLevel(level)) {
             states.add(state.toString());
@@ -92,5 +89,4 @@ public enum RequestState {
 
         return states.toArray(new String[states.size()]);
     }
-
 }

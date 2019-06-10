@@ -15,10 +15,7 @@ public enum Binding {
     /**  */
     private final String value;
     
-    /**
-     * @param value
-     */
-    private Binding(final String value) {
+    Binding(final String value) {
         this.value = value;
     }
     
