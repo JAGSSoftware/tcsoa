@@ -61,15 +61,15 @@
             <version>3.1</version>
         </dependency>
 
-        <!-- System Dependencies: DispatcherClient -->
-        <!--
         <dependency>
-            <groupId>DCCore</groupId>
-            <artifactId>DCCore</artifactId>
-            <version>1</version>
-            <scope>system</scope>
-            <systemPath>${tcdispatcherclient.path}/DCCore.jar</systemPath>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
-         -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

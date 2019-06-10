@@ -66,6 +66,7 @@ class CredentialManagerImpl implements CredentialManager {
      */
     @Override
     public void setGroupRole(final String group, final String role) {
+        // Empty body
     }
 
     /*
@@ -75,6 +76,7 @@ class CredentialManagerImpl implements CredentialManager {
      */
     @Override
     public void setUserPassword(final String username, final String password, final String discriminator) {
+        // Empty body
     }
 
     /**
