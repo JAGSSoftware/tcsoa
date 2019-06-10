@@ -38,7 +38,7 @@ public enum RequestState {
      * @return
      */
     public static synchronized List<RequestState> findStateByLevel(final RequestLevel level) {
-        final List<RequestState> states = new ArrayList<RequestState>();
+        final List<RequestState> states = new ArrayList<>();
 
         for (final RequestState state : values()) {
             if (state.level == level) {
@@ -54,7 +54,7 @@ public enum RequestState {
      * @return
      */
     public static synchronized String[] findStateByLevelToString(final RequestLevel level) {
-        final List<String> states = new ArrayList<String>();
+        final List<String> states = new ArrayList<>();
 
         for (final RequestState state : findStateByLevel(level)) {
             states.add(state.toString());
@@ -68,7 +68,7 @@ public enum RequestState {
      * @return
      */
     public static synchronized List<RequestState> findStateNotByLevel(final RequestLevel level) {
-        final List<RequestState> states = new ArrayList<RequestState>();
+        final List<RequestState> states = new ArrayList<>();
 
         for (final RequestState state : values()) {
             if (state.level != level) {
@@ -84,7 +84,7 @@ public enum RequestState {
      * @return
      */
     public static synchronized String[] findStateNotByLevelToString(final RequestLevel level) {
-        final List<String> states = new ArrayList<String>();
+        final List<String> states = new ArrayList<>();
 
         for (final RequestState state : findStateNotByLevel(level)) {
             states.add(state.toString());

@@ -18,8 +18,7 @@ public enum Protocol {
     IIOP(new String[]{"iiop", "ior"}, SoaConstants.IIOP),
     TCCS(new String[]{"tccs"}, SoaConstants.TCCS);
 
-    /**  */
-    private static final Map<String, Protocol> map = new TreeMap<String, Protocol>();
+    private static final Map<String, Protocol> map = new TreeMap<>();
     private final String[] protocols;
     private final String value;
 
@@ -31,10 +30,7 @@ public enum Protocol {
         }
     }
 
-    /**
-     * @param value
-     */
-    private Protocol(final String[] protocols, final String value) {
+    Protocol(final String[] protocols, final String value) {
         this.protocols = protocols;
         this.value = value;
     }

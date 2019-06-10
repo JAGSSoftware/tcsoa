@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import org.jag.teamcenter.soa.dispatcher.RequestState;
-
 import com.teamcenter.soa.client.model.ModelObject;
+import org.jag.teamcenter.soa.dispatcher.RequestState;
 
 /**
  * @author Jose A. Garcia Sanchez
  */
 public final class QueryDispatcherRequestFilter {
+
     private final String[] providers;
     private final String[] services;
     private final String[] requestStates;
@@ -83,13 +83,14 @@ public final class QueryDispatcherRequestFilter {
     }
 
     public static class Builder {
-        private List<String> providers = new ArrayList<String>();
-        private List<String> services = new ArrayList<String>();
-        private List<String> requestStates = new ArrayList<String>();
-        private List<Integer> priorities = new ArrayList<Integer>();
+
+        private List<String> providers = new ArrayList<>();
+        private List<String> services = new ArrayList<>();
+        private List<String> requestStates = new ArrayList<>();
+        private List<Integer> priorities = new ArrayList<>();
         private Calendar modifiedDate = null;
-        private List<ModelObject> primaryObjects = new ArrayList<ModelObject>();
-        private List<String> taskIds = new ArrayList<String>();
+        private List<ModelObject> primaryObjects = new ArrayList<>();
+        private List<String> taskIds = new ArrayList<>();
         private boolean noLoadData;
 
         public Builder addProvider(final String provider) {

@@ -7,13 +7,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.jag.teamcenter.soa.types.DatasetType;
-import org.jag.teamcenter.soa.types.NamedReference;
-import org.jag.teamcenter.soa.types.RelationType;
-
 import com.teamcenter.services.strong.core._2008_06.DataManagement;
 import com.teamcenter.services.strong.core._2008_06.DataManagement.NamedReferenceFilter;
 import com.teamcenter.services.strong.core._2008_06.DataManagement.NamedReferenceList;
+import org.jag.teamcenter.soa.types.DatasetType;
+import org.jag.teamcenter.soa.types.NamedReference;
+import org.jag.teamcenter.soa.types.RelationType;
 
 /**
  * The class contains the filter fields for the structure {@link DataManagement.DatasetInfo}. It's an immutable object
@@ -24,9 +23,11 @@ import com.teamcenter.services.strong.core._2008_06.DataManagement.NamedReferenc
  * <ol>
  * <li>{@code final DatasetInfo datasetInfo = new DatasetInfo.Builder("client id").uid("AJGAAAycoJRX_C").build();}</li>
  * <li>
- * {@code final DatasetInfo datasetInfo = new DatasetInfo.Builder("client id").filter().all().name("excelfile.xlsx").useNameFirst(true).build();}
+ * {@code final DatasetInfo datasetInfo = new DatasetInfo.Builder("client id").filter().all().name("excelfile.xlsx")
+ * .useNameFirst(true).build();}
  * <li>
- * {@code final DatasetInfo datasetInfo = new DatasetInfo.Builder("client id").filter().all().namedReferenceFilter("PDF_Reference", "ApPAAAycoJRX_C", false).build();}
+ * {@code final DatasetInfo datasetInfo = new DatasetInfo.Builder("client id").filter().all().namedReferenceFilter
+ * ("PDF_Reference", "ApPAAAycoJRX_C", false).build();}
  * </li> </li>
  * </ol>
  *
@@ -35,16 +36,24 @@ import com.teamcenter.services.strong.core._2008_06.DataManagement.NamedReferenc
  */
 public final class DatasetInfo {
 
-    /** Client identifier. It should be the same in all filter structures. */
+    /**
+     * Client identifier. It should be the same in all filter structures.
+     */
     private final String clientId;
 
-    /** <i>UID</i> of the item to be filtered. */
+    /**
+     * <i>UID</i> of the item to be filtered.
+     */
     private final String uid;
 
-    /** Dataset filter. */
+    /**
+     * Dataset filter.
+     */
     private final DatasetFilter filter;
 
-    /** List of {@link NamedReferenceList}. */
+    /**
+     * List of {@link NamedReferenceList}.
+     */
     private final List<NamedReferenceList> namedRefs;
 
     /**
@@ -87,17 +96,26 @@ public final class DatasetInfo {
      * @author Jose A. Garcia Sanchez
      */
     private static class Builder {
-        /** Client identifier. */
+
+        /**
+         * Client identifier.
+         */
         private final String clientId;
 
-        /** <i>UID</i> of the dataset to be sought. */
+        /**
+         * <i>UID</i> of the dataset to be sought.
+         */
         protected String uid = "";
 
-        /** Builder for the {@link DataManagement.DatasetFilter} field. */
+        /**
+         * Builder for the {@link DataManagement.DatasetFilter} field.
+         */
         protected final DatasetFilter.Builder datasetFilterBuilder = new DatasetFilter.Builder();
 
-        /** List of {@link NamedReferenceList}. */
-        protected final List<NamedReferenceList> namedReferences = new ArrayList<NamedReferenceList>();
+        /**
+         * List of {@link NamedReferenceList}.
+         */
+        protected final List<NamedReferenceList> namedReferences = new ArrayList<>();
 
         /**
          * @param clientId Client identifier
@@ -119,6 +137,7 @@ public final class DatasetInfo {
         }
     }
 
+
     /**
      * Builder specialized to build the filter using <i>UID</i> of one dataset.
      *
@@ -128,7 +147,7 @@ public final class DatasetInfo {
 
         /**
          * @param clientId Client identified
-         * @param uid <i>UID</i> of the sought dataset
+         * @param uid      <i>UID</i> of the sought dataset
          * @throws NullPointerException if any of the parameters is null
          */
         public BuilderUid(final String clientId, final String uid) {
@@ -140,12 +159,16 @@ public final class DatasetInfo {
         }
     }
 
+
     /**
      * Builder specialized to build the generic filter for datasets.
      *
      * @author Jose A. Garcia Sanchez
      */
     public static class BuilderFilter extends Builder {
+
+        private static final String NAMED_REFERENCE_IS_NULL = "namedReference is null";
+
         /**
          * @param clientId Client identifier
          * @throws NullPointerException if the parameter is null
@@ -218,7 +241,7 @@ public final class DatasetInfo {
         /**
          * Add a {@link DataManagement.DatasetFilter} element to the filter.
          *
-         * @param datasetTypeName Name of the dataset type
+         * @param datasetTypeName  Name of the dataset type
          * @param relationTypeName Name of the relation type
          * @return The itself instance of the builder
          * @throws NullPointerException if any of the arguments is null
@@ -240,7 +263,7 @@ public final class DatasetInfo {
         /**
          * Add a {@link DataManagement.DatasetFilter} element to the filter using enumerations as allowed values.
          *
-         * @param dataset Value type for the dataset
+         * @param dataset  Value type for the dataset
          * @param relation Value type for the relation
          * @return The itself instance of the builder
          */
@@ -252,13 +275,13 @@ public final class DatasetInfo {
          * Add a {@link DataManagement.NamedReferenceFilter} element to the filter.
          *
          * @param namedReference Name of the reference
-         * @param uidReferenced <i>UID</i> of the reference
+         * @param uidReferenced  <i>UID</i> of the reference
          * @return The itself instance of the builder
          * @throws NullPointerException if any of the arguments is null
          */
         public BuilderFilter namedReferenceFilter(final String namedReference, final String uidReferenced) {
             if (namedReference == null) {
-                throw new NullPointerException("namedReference is null");
+                throw new NullPointerException(NAMED_REFERENCE_IS_NULL);
             }
 
             if (uidReferenced == null) {
@@ -274,13 +297,13 @@ public final class DatasetInfo {
          * Add a {@link DataManagement.NamedReferenceFilter} element to the filter.
          *
          * @param namedReference Enumeration value for the named reference
-         * @param uidReferenced <i>UID</i> of the reference
+         * @param uidReferenced  <i>UID</i> of the reference
          * @return The itself instance of the builder
          * @throws NullPointerException if any of the arguments is null
          */
         public BuilderFilter namedReferenceFilter(final NamedReference namedReference, final String uidReferenced) {
             if (namedReference == null) {
-                throw new NullPointerException("namedReference is null");
+                throw new NullPointerException(NAMED_REFERENCE_IS_NULL);
             }
 
             return namedReferenceFilter(namedReference.namedReference(), uidReferenced);
@@ -290,13 +313,13 @@ public final class DatasetInfo {
          * Add a {@link NamedReferenceList} element to the filter.
          *
          * @param namedReference Name of the reference
-         * @param ticket {@code true} to get the ticket of the attached dataset, {@code false} otherwise
+         * @param ticket         {@code true} to get the ticket of the attached dataset, {@code false} otherwise
          * @return The itself instance of the builder
          * @throws NullPointerException if {@code namedReference} is null
          */
         public BuilderFilter namedReference(final String namedReference, final boolean ticket) {
             if (namedReference == null) {
-                throw new NullPointerException("namedReference is null");
+                throw new NullPointerException(NAMED_REFERENCE_IS_NULL);
             }
 
             final NamedReferenceList namedReferenceElement = new NamedReferenceList();
@@ -312,13 +335,13 @@ public final class DatasetInfo {
          * {@link NamedReference}.
          *
          * @param namedReference Enumeration value for the reference
-         * @param ticket {@code true} to get the ticket of the attached dataset, {@code false} otherwise
+         * @param ticket         {@code true} to get the ticket of the attached dataset, {@code false} otherwise
          * @return The itself instance of the builder
          * @throws NullPointerException if namedReference is null
          */
         public BuilderFilter namedReference(final NamedReference namedReference, final boolean ticket) {
             if (namedReference == null) {
-                throw new NullPointerException("namedReference is null");
+                throw new NullPointerException(NAMED_REFERENCE_IS_NULL);
             }
 
             return namedReference(namedReference.namedReference(), ticket);
@@ -329,8 +352,8 @@ public final class DatasetInfo {
          * {@code namedReference}.
          *
          * @param namedReference Name of the reference
-         * @param uidReferenced <i>UID</i> of the reference
-         * @param ticket {@code true} to the the ticket of the attached dataset, {@code false} otherwise
+         * @param uidReferenced  <i>UID</i> of the reference
+         * @param ticket         {@code true} to the the ticket of the attached dataset, {@code false} otherwise
          * @return The itself instance of the builder
          */
         public BuilderFilter namedReferenceFilter(final String namedReference, final String uidReferenced,
@@ -344,8 +367,8 @@ public final class DatasetInfo {
          * {@code namedReference}, specifying the namedReference from {@link NamedReference}.
          *
          * @param namedReference Enumeration value for the reference
-         * @param uidReferenced <i>UID</i> of the reference
-         * @param ticket {@code true} to the the ticket of the attached dataset, {@code false} otherwise
+         * @param uidReferenced  <i>UID</i> of the reference
+         * @param ticket         {@code true} to the the ticket of the attached dataset, {@code false} otherwise
          * @return The itself instance of the builder
          */
         public BuilderFilter namedReferenceFilter(final NamedReference namedReference, final String uidReferenced,

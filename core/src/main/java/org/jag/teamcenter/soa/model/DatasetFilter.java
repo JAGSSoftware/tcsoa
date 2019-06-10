@@ -12,7 +12,8 @@ import com.teamcenter.services.strong.core._2008_06.DataManagement;
 /**
  * @author Jose A. Garcia Sanchez
  */
-class DatasetFilter implements Cloneable {
+class DatasetFilter {
+
     private final String name;
     private final List<DataManagement.NamedReferenceFilter> namedReferenceFilter;
     private final String processing;
@@ -53,10 +54,13 @@ class DatasetFilter implements Cloneable {
      * @author Jose A. Garcia Sanchez
      */
     static class Builder {
+
         private String name = "";
-        private List<DataManagement.NamedReferenceFilter> namedReferenceFilters = new ArrayList<DataManagement.NamedReferenceFilter>();
+        private List<DataManagement.NamedReferenceFilter> namedReferenceFilters =
+                new ArrayList<>();
         private String processing = "None";
-        private List<DataManagement.DatasetRelationFilter> datasetRelationFilters = new ArrayList<DataManagement.DatasetRelationFilter>();
+        private List<DataManagement.DatasetRelationFilter> datasetRelationFilters =
+                new ArrayList<>();
         private boolean useNameFirst = false;
 
         /**
@@ -118,7 +122,8 @@ class DatasetFilter implements Cloneable {
          * @return
          */
         public Builder datasetRelationFilter(final String datasetTypeName, final String relationTypeName) {
-            final DataManagement.DatasetRelationFilter datasetRelationFilter = new DataManagement.DatasetRelationFilter();
+            final DataManagement.DatasetRelationFilter datasetRelationFilter =
+                    new DataManagement.DatasetRelationFilter();
 
             datasetRelationFilter.datasetTypeName = datasetTypeName;
             datasetRelationFilter.relationTypeName = relationTypeName;

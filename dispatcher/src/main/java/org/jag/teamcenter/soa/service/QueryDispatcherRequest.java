@@ -15,6 +15,10 @@ import com.teamcenter.soa.client.model.strong.DispatcherRequest;
  */
 public class QueryDispatcherRequest {
 
+    private QueryDispatcherRequest() {
+        // Empty body
+    }
+
     /**
      * @param filter
      * @return
@@ -26,7 +30,7 @@ public class QueryDispatcherRequest {
                 filter.primaryObjects(),
                 filter.tasksIds(), filter.loadData());
 
-        final List<DispatcherRequest> requests = new ArrayList<DispatcherRequest>();
+        final List<DispatcherRequest> requests = new ArrayList<>();
         for (final ModelObject modelObject : modelObjects) {
             requests.add((DispatcherRequest) modelObject);
         }
