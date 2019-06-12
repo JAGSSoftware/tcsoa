@@ -28,7 +28,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <sonar.java.binaries>${project.build.outputDirectory}</sonar.java.binaries>
-        <sonar.projectKey>${project.groupId}:${project.artifactId}:${project.version}</sonar.projectKey>
+<!--        <sonar.projectKey>${project.groupId}:${project.artifactId}:${project.version}</sonar.projectKey>-->
         <sonar.sources>${project.build.sourceDirectory}</sonar.sources>
 
     </properties>
