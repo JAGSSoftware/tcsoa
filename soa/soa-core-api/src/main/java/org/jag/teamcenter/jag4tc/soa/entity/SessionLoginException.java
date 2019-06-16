@@ -28,7 +28,7 @@ import com.teamcenter.schemas.soa._2006_03.exceptions.InvalidCredentialsExceptio
 public class SessionLoginException extends Exception {
 
     private static final long serialVersionUID = 1L;
-    private final transient Credentials credentials;
+    private final Credentials credentials;
 
     public SessionLoginException(final Credentials credentials, final InvalidCredentialsException e) {
         super(e);
