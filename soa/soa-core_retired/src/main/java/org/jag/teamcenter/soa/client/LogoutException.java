@@ -6,6 +6,7 @@ package org.jag.teamcenter.soa.client;
 /**
  * @author Jose A. Garcia
  */
+@Deprecated
 public class LogoutException extends RuntimeException {
 
 	/**  */

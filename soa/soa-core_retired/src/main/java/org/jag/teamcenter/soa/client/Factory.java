@@ -12,6 +12,7 @@ import com.teamcenter.soa.client.SsoCredentials;
 /**
  * @author Jose A. Garcia Sanchez
  */
+@Deprecated
 final class Factory {
     public static CredentialManager newCredentialManager(final Builder builder) {
         final CredentialManager credentialManager;

@@ -6,6 +6,7 @@ package org.jag.teamcenter.soa.types;
 /**
  * @author Jose A. Garcia Sanchez
  */
+@Deprecated
 public enum SoaEPMAction {
     ASSIGN("SOA_EPM_assign_action"),
     START("SOA_EPM_start_action"),

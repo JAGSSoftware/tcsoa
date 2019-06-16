@@ -9,6 +9,7 @@ import java.util.List;
 /**
  * @author Jose A. Garcia Sanchez
  */
+@Deprecated
 public class GetItemAndRelatedObjectsInfo {
     /** Client identifier. */
     private final String clientId;

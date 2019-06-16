@@ -9,6 +9,7 @@ import com.teamcenter.soa.SoaConstants;
  * @author Jose A. Garcia Sanchez
  *
  */
+@Deprecated
 public enum Binding {
     REST(SoaConstants.REST);
     

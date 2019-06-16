@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>soa-core_retired</module>
         <module>soa-core</module>
     </modules>
 </project>

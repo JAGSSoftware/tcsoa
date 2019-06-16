@@ -34,6 +34,7 @@ import org.jag.teamcenter.soa.types.RelationType;
  * @author Jose A. Garcia Sanchez
  * @see DataManagement.DatasetInfo
  */
+@Deprecated
 public final class DatasetInfo {
 
     /**

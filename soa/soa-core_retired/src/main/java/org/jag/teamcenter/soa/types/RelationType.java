@@ -6,6 +6,7 @@ package org.jag.teamcenter.soa.types;
 /**
  * @author Jose A. Garcia Sanchez
  */
+@Deprecated
 public enum RelationType {
     IMAN_MANIFESTATION("IMAN_manifestation"),
     IMAN_SPECIFICATION("IMAN_specification");

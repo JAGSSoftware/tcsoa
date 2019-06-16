@@ -10,6 +10,7 @@ import com.teamcenter.services.strong.core._2011_06.Session.Credentials;
 /**
  * @author Jose A. Garcia
  */
+@Deprecated
 public class InvalidCredentialsException extends Exception {
 
 	private static final long serialVersionUID = 3677748379607133391L;

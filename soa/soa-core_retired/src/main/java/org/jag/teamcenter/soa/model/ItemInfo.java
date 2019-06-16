@@ -33,6 +33,7 @@ import com.teamcenter.services.strong.core._2008_06.DataManagement;
  * @author Jose A. Garcia Sanchez
  * @see com.teamcenter.services.strong.core._2008_06.DataManagement.ItemInfo
  */
+@Deprecated
 public final class ItemInfo {
 	/** Client identifier. It should be the same in all filter structures. */
 	private final String clientId;

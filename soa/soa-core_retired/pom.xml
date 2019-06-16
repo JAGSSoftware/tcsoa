@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.jag.teamcenter.jag4tc</groupId>
+        <artifactId>soa</artifactId>
+        <version>1.0-11000.2.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>soa-core_retired</artifactId>
+
+    <properties>
+        <tcsoa.version>11000.2.0</tcsoa.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.14</version>
+        </dependency>
+
+        <!-- System dependencies -->
+        <dependency>
+            <groupId>com.siemens.teamcenter.soa</groupId>
+            <artifactId>TcSoaBomStrong</artifactId>
+            <version>${tcsoa.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.siemens.teamcenter.soa</groupId>
+            <artifactId>TcSoaClient</artifactId>
+            <version>${tcsoa.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.siemens.teamcenter.soa</groupId>
+            <artifactId>TcSoaCommon</artifactId>
+            <version>${tcsoa.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.siemens.teamcenter.soa</groupId>
+            <artifactId>TcSoaCoreStrong</artifactId>
+            <version>${tcsoa.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.siemens.teamcenter.soa</groupId>
+            <artifactId>TcSoaStrongModel</artifactId>
+            <version>${tcsoa.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

@@ -19,6 +19,7 @@ import com.teamcenter.soa.client.CredentialManager;
 /**
  * @author Jose A. Garcia Sanchez
  */
+@Deprecated
 public class Session {
     private static final Logger LOGGER = Logger.getLogger(Session.class);
     private final String hostPath;

@@ -13,6 +13,7 @@ import com.teamcenter.soa.SoaConstants;
 /**
  * @author Jose A. Garcia Sanchez
  */
+@Deprecated
 public enum Protocol {
     HTTP(new String[]{"http", "https"}, SoaConstants.HTTP),
     IIOP(new String[]{"iiop", "ior"}, SoaConstants.IIOP),

@@ -9,6 +9,7 @@ import com.teamcenter.services.strong.core._2008_06.DataManagement;
  * @author Jose A. Garcia Sanchez
  * @see DataManagement.RevInfo
  */
+@Deprecated
 public class RevisionInfo {
     /** Client identifier. */
     private final String clientId;

@@ -11,6 +11,7 @@ import com.teamcenter.soa.exceptions.CanceledOperationException;
 /**
  * @author Jose A. Garcia Sanchez
  */
+@Deprecated
 class CredentialManagerImpl implements CredentialManager {
     private final int credentialType;
     private final String username;

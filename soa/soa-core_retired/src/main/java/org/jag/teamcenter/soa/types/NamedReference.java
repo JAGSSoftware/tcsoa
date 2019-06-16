@@ -6,6 +6,7 @@ package org.jag.teamcenter.soa.types;
 /**
  * @author Jose A. Garcia Sanchez
  */
+@Deprecated
 public enum NamedReference {
     PDF("PDF_Reference"),
     EXCEL("excel");

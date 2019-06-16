@@ -17,7 +17,7 @@
         </dependency>
         <dependency>
             <groupId>org.jag.teamcenter.jag4tc</groupId>
-            <artifactId>soa-core</artifactId>
+            <artifactId>soa-core_retired</artifactId>
             <version>${project.version}</version>
         </dependency>
 

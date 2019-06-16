@@ -12,6 +12,7 @@ import com.teamcenter.services.strong.core._2008_06.DataManagement;
 /**
  * @author Jose A. Garcia Sanchez
  */
+@Deprecated
 class DatasetFilter {
 
     private final String name;
