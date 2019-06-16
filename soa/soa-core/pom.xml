@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.jag.teamcenter</groupId>
+        <groupId>org.jag.teamcenter.jag4tc</groupId>
         <artifactId>soa</artifactId>
         <version>1.0-11000.2.0-SNAPSHOT</version>
     </parent>

@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.jag.teamcenter.jag4tc</groupId>
+        <artifactId>dispatcher</artifactId>
+        <version>1.0-11000.2.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>dispatcher-core</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.siemens.teamcenter.dispatcher.client</groupId>
+            <artifactId>DCCore</artifactId>
+            <version>v20150715</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jag.teamcenter.jag4tc</groupId>
+            <artifactId>soa-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
