@@ -7,11 +7,7 @@
         <artifactId>soa</artifactId>
         <version>1.0-11000.2.0-SNAPSHOT</version>
     </parent>
-    <artifactId>core</artifactId>
-
-    <build>
-        <finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
-    </build>
+    <artifactId>soa-core</artifactId>
 
     <properties>
         <tcsoa.version>11000.2.0</tcsoa.version>

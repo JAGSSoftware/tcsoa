@@ -9,10 +9,6 @@
     </parent>
     <artifactId>dispatcher</artifactId>
 
-    <build>
-        <finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
-    </build>
-
     <dependencies>
         <dependency>
             <groupId>com.siemens.teamcenter.dispatcher.client</groupId>
@@ -21,7 +17,7 @@
         </dependency>
         <dependency>
             <groupId>org.jag.teamcenter</groupId>
-            <artifactId>core</artifactId>
+            <artifactId>soa-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 
