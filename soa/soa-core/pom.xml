@@ -17,13 +17,13 @@
     <dependencies>
         <dependency>
             <groupId>com.siemens.teamcenter.soa</groupId>
-            <artifactId>TcSoaCommon</artifactId>
+            <artifactId>TcSoaClient</artifactId>
             <version>${tcsoa.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.siemens.teamcenter.soa</groupId>
-            <artifactId>TcSoaClient</artifactId>
-            <version>${tcsoa.version}</version>
+            <groupId>org.jag.teamcenter.jag4tc</groupId>
+            <artifactId>soa-core-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>

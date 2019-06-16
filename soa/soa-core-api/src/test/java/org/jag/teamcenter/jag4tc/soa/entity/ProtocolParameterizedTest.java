@@ -27,7 +27,6 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import com.teamcenter.soa.SoaConstants;
-import org.jag.teamcenter.jag4tc.soa.entity.Protocol;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;

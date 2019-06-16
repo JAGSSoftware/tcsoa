@@ -10,5 +10,26 @@
     </parent>
     <artifactId>soa-core-api</artifactId>
 
+    <properties>
+        <tcsoa.version>11000.2.0</tcsoa.version>
+    </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.siemens.teamcenter.soa</groupId>
+            <artifactId>TcSoaCommon</artifactId>
+            <version>${tcsoa.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
