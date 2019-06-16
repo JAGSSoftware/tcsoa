@@ -8,22 +8,22 @@
         <artifactId>soa</artifactId>
         <version>1.0-11000.2.0-SNAPSHOT</version>
     </parent>
-    <artifactId>soa-core</artifactId>
+    <artifactId>soa-core-guice</artifactId>
 
     <properties>
-        <tcsoa.version>11000.2.0</tcsoa.version>
+        <guice.version>4.2.2</guice.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.siemens.teamcenter.soa</groupId>
-            <artifactId>TcSoaCommon</artifactId>
-            <version>${tcsoa.version}</version>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>${guice.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.siemens.teamcenter.soa</groupId>
-            <artifactId>TcSoaClient</artifactId>
-            <version>${tcsoa.version}</version>
+            <groupId>org.jag.teamcenter.jag4tc</groupId>
+            <artifactId>soa-core</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
@@ -34,11 +34,6 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 José A. García Sánchez
+ * Copyright (c) 2019 José A. García Sánchez
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,18 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.jag.teamcenter.jag4tc.soa.services;
+package org.jag.teamcenter.jag4tc.soa.entity;
 
-import org.jag.teamcenter.jag4tc.soa.model.Protocol;
+import com.google.inject.AbstractModule;
 
-class IiopConnectionConfiguration extends AbstractConnectionConfiguration {
-
-    protected IiopConnectionConfiguration(final String host, final String discriminator) {
-        super(host, discriminator);
-    }
+public class EntityModule extends AbstractModule {
 
     @Override
-    public Protocol getProtocol() {
-        return Protocol.IIOP;
+    protected void configure() {
+        bind(ConnectionConfigurationFactory.class).to(ConnectionConfigurationFactoryBean.class);
     }
 }

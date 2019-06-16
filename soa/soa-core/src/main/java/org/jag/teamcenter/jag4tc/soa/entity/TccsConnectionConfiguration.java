@@ -21,27 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.jag.teamcenter.jag4tc.soa.services;
+package org.jag.teamcenter.jag4tc.soa.entity;
 
-import org.jag.teamcenter.jag4tc.soa.model.ConnectionConfiguration;
+class TccsConnectionConfiguration extends AbstractConnectionConfiguration {
 
-abstract class AbstractConnectionConfiguration implements ConnectionConfiguration {
-
-    private final String host;
-    private final String discriminator;
-
-    protected AbstractConnectionConfiguration(final String host, final String discriminator) {
-        this.host = host;
-        this.discriminator = discriminator;
+    protected TccsConnectionConfiguration(final String host, final String discriminator) {
+        super(host, discriminator);
     }
 
     @Override
-    public String getHost() {
-        return host;
-    }
-
-    @Override
-    public String getDiscriminator() {
-        return discriminator;
+    public Protocol getProtocol() {
+        return Protocol.TCCS;
     }
 }

@@ -21,27 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.jag.teamcenter.jag4tc.soa.model;
+package org.jag.teamcenter.jag4tc.soa.entity;
 
-public interface Credentials {
-
-    /**
-     * @return {@code username} to log in to Teamcenter
-     */
-    String getUsername();
+public interface ConnectionConfigurationFactory {
 
     /**
-     * @return {@code password} to log in to Teamcenter
+     * @param host          Host to connect to
+     * @param discriminator Discriminator of the connection
+     * @return Configuration for the connection
      */
-    String getPassword();
-
-    /**
-     * @return {@code group} to log in to Teamcenter
-     */
-    String getGroup();
-
-    /**
-     * @return {@code role} to log in to Teamcenter
-     */
-    String getRole();
+    ConnectionConfiguration createConnectionConfiguration(String host, String discriminator);
 }

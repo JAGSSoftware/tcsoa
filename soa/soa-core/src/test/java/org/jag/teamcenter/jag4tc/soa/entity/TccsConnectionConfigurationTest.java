@@ -21,36 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.jag.teamcenter.jag4tc.soa.services;
+package org.jag.teamcenter.jag4tc.soa.entity;
 
-import org.jag.teamcenter.jag4tc.soa.model.Protocol;
+import org.jag.teamcenter.jag4tc.soa.entity.Protocol;
+import org.jag.teamcenter.jag4tc.soa.entity.TccsConnectionConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AbstractConnectionConfigurationTest {
+public class TccsConnectionConfigurationTest {
 
-    private AbstractConnectionConfiguration underTest;
+    private TccsConnectionConfiguration underTest;
 
     @Before
     public void setUp() {
-        underTest = new AbstractConnectionConfiguration("http://com.host", "discriminator") {
-
-            @Override
-            public Protocol getProtocol() {
-                return null;
-            }
-        };
+        underTest = new TccsConnectionConfiguration("http://com.host", "discriminator");
     }
 
     @Test
-    public void getHost() {
-        assertThat(underTest.getHost()).isEqualTo("http://com.host");
-    }
-
-    @Test
-    public void getDiscriminator() {
-        assertThat(underTest.getDiscriminator()).isEqualTo("discriminator");
+    public void getProtocol() {
+        assertThat(underTest.getProtocol()).isEqualTo(Protocol.TCCS);
     }
 }

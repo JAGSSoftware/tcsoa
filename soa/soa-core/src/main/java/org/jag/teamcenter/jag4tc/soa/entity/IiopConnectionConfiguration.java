@@ -21,22 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.jag.teamcenter.jag4tc.soa.model;
+package org.jag.teamcenter.jag4tc.soa.entity;
 
-import com.teamcenter.soa.SoaConstants;
+class IiopConnectionConfiguration extends AbstractConnectionConfiguration {
 
-public enum Protocol {
-    HTTP(SoaConstants.HTTP),
-    TCCS(SoaConstants.TCCS),
-    IIOP(SoaConstants.IIOP);
-
-    private final String value;
-
-    Protocol(final String value) {
-        this.value = value;
+    protected IiopConnectionConfiguration(final String host, final String discriminator) {
+        super(host, discriminator);
     }
 
-    public String getProtocolValue() {
-        return value;
+    @Override
+    public Protocol getProtocol() {
+        return Protocol.IIOP;
     }
 }

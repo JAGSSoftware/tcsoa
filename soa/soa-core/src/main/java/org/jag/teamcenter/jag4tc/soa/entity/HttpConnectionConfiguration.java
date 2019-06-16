@@ -21,22 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.jag.teamcenter.jag4tc.soa.model;
+package org.jag.teamcenter.jag4tc.soa.entity;
 
-public interface ConnectionConfiguration {
+class HttpConnectionConfiguration extends AbstractConnectionConfiguration {
 
-    /**
-     * @return {@code URI} to connect to Teamcenter
-     */
-    String getHost();
+    protected HttpConnectionConfiguration(final String host, final String discriminator) {
+        super(host, discriminator);
+    }
 
-    /**
-     * @return {@code discriminator} or unique ID of the connection
-     */
-    String getDiscriminator();
-
-    /**
-     * @return procotol used to connect to Teamcenter
-     */
-    Protocol getProtocol();
+    @Override
+    public Protocol getProtocol() {
+        return Protocol.HTTP;
+    }
 }

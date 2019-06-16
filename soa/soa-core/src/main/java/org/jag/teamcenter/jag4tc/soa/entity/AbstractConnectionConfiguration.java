@@ -21,25 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.jag.teamcenter.jag4tc.soa.services;
+package org.jag.teamcenter.jag4tc.soa.entity;
 
-import org.jag.teamcenter.jag4tc.soa.model.Protocol;
-import org.junit.Before;
-import org.junit.Test;
+import org.jag.teamcenter.jag4tc.soa.entity.ConnectionConfiguration;
 
-import static org.assertj.core.api.Assertions.assertThat;
+abstract class AbstractConnectionConfiguration implements ConnectionConfiguration {
 
-public class HttpConnectionConfigurationTest {
+    private final String host;
+    private final String discriminator;
 
-    private HttpConnectionConfiguration underTest;
-
-    @Before
-    public void setUp() {
-        underTest = new HttpConnectionConfiguration("http://com.host", "discriminator");
+    protected AbstractConnectionConfiguration(final String host, final String discriminator) {
+        this.host = host;
+        this.discriminator = discriminator;
     }
 
-    @Test
-    public void getProtocol() {
-        assertThat(underTest.getProtocol()).isEqualTo(Protocol.HTTP);
+    @Override
+    public String getHost() {
+        return host;
+    }
+
+    @Override
+    public String getDiscriminator() {
+        return discriminator;
     }
 }

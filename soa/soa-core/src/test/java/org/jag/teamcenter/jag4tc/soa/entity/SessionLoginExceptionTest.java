@@ -21,25 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.jag.teamcenter.jag4tc.soa.services;
+package org.jag.teamcenter.jag4tc.soa.entity;
 
-import org.jag.teamcenter.jag4tc.soa.model.Protocol;
+import com.teamcenter.schemas.soa._2006_03.exceptions.InvalidCredentialsException;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class IiopConnectionConfigurationTest {
+@RunWith(MockitoJUnitRunner.class)
+public class SessionLoginExceptionTest {
 
-    private IiopConnectionConfiguration underTest;
+    private SessionLoginException underTest;
+
+    @Mock
+    private Credentials credentials;
 
     @Before
     public void setUp() {
-        underTest = new IiopConnectionConfiguration("http://com.host", "discriminator");
+        underTest = new SessionLoginException(credentials, new InvalidCredentialsException("Fake exception"));
     }
 
     @Test
-    public void getProtocol() {
-        assertThat(underTest.getProtocol()).isEqualTo(Protocol.IIOP);
+    public void getCredentials() {
+        assertThat(underTest.getCredentials()).isEqualTo(credentials);
+    }
+
+    @Test
+    public void getMessage() {
+        assertThat(underTest)
+                .hasMessage("com.teamcenter.schemas.soa._2006_03.exceptions.InvalidCredentialsException: Fake exception");
     }
 }

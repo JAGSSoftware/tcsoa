@@ -21,25 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.jag.teamcenter.jag4tc.soa.services;
+package org.jag.teamcenter.jag4tc.soa.entity;
 
-import org.jag.teamcenter.jag4tc.soa.model.Protocol;
-import org.junit.Before;
-import org.junit.Test;
+import com.teamcenter.schemas.soa._2006_03.exceptions.InvalidCredentialsException;
 
-import static org.assertj.core.api.Assertions.assertThat;
+public class SessionLoginException extends Exception {
 
-public class TccsConnectionConfigurationTest {
+    private static final long serialVersionUID = 1L;
+    private final transient Credentials credentials;
 
-    private TccsConnectionConfiguration underTest;
-
-    @Before
-    public void setUp() {
-        underTest = new TccsConnectionConfiguration("http://com.host", "discriminator");
+    public SessionLoginException(final Credentials credentials, final InvalidCredentialsException e) {
+        super(e);
+        this.credentials = credentials;
     }
 
-    @Test
-    public void getProtocol() {
-        assertThat(underTest.getProtocol()).isEqualTo(Protocol.TCCS);
+    public Credentials getCredentials() {
+        return credentials;
     }
 }
