@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2019 José A. García Sánchez
+ * Copyright (c) 2018 José A. García Sánchez
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,40 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.jag.teamcenter.jag4tc.soa.model;
+package org.jag.teamcenter.jag4tc.soa.services;
 
-import java.util.Arrays;
-import java.util.Collection;
-
-import com.teamcenter.soa.SoaConstants;
+import org.jag.teamcenter.jag4tc.soa.model.Protocol;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(Parameterized.class)
-public class ProtocolParameterizedTest {
+public class HttpConnectionConfigurationTest {
 
-    @Parameterized.Parameters(name = "{0}.getProtocolValue() = {1}")
-    public static Collection<Object[]> data() {
-        return Arrays.asList(new Object[][]{
-                {Protocol.HTTP, SoaConstants.HTTP},
-                {Protocol.IIOP, SoaConstants.IIOP},
-                {Protocol.TCCS, SoaConstants.TCCS}
-        });
-    }
+    private HttpConnectionConfiguration underTest;
 
-    private final Protocol input;
-    private final String expectedProtocolValue;
-
-    public ProtocolParameterizedTest(final Protocol input, final String expectedProtocolValue) {
-        this.input = input;
-        this.expectedProtocolValue = expectedProtocolValue;
+    @Before
+    public void setUp() {
+        underTest = new HttpConnectionConfiguration("http://com.host", "discriminator");
     }
 
     @Test
-    public void getProtocolValue() {
-        assertThat(input.getProtocolValue()).isEqualTo(expectedProtocolValue);
+    public void getProtocol() {
+        assertThat(underTest.getProtocol()).isEqualTo(Protocol.HTTP);
     }
 }
