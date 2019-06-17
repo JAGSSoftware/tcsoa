@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2019 José A. García Sánchez
+ * Copyright (c) 2018 José A. García Sánchez
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,13 +23,19 @@
  */
 package org.jag.teamcenter.jag4tc.soa.entity;
 
-import com.google.inject.AbstractModule;
+import com.google.inject.Inject;
+import com.teamcenter.services.loose.core.SessionService;
 
-public class EntityModule extends AbstractModule {
+class SessionServiceProviderBean {
 
-    @Override
-    protected void configure() {
-        bind(ConnectionConfigurationFactory.class).to(ConnectionConfigurationFactoryBean.class);
-        bind(ConnectionConnector.class).to(ConnectionConnectorBean.class);
+    private final ConnectionPoolBean connectionPool;
+
+    @Inject
+    SessionServiceProviderBean(final ConnectionPoolBean connectionPool) {
+        this.connectionPool = connectionPool;
+    }
+
+    public SessionService getService() {
+        return SessionService.getService(connectionPool.getConnectionBean().getConnection());
     }
 }

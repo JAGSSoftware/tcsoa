@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2019 José A. García Sánchez
+ * Copyright (c) 2018 José A. García Sánchez
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,13 +23,34 @@
  */
 package org.jag.teamcenter.jag4tc.soa.entity;
 
-import com.google.inject.AbstractModule;
+import com.google.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class EntityModule extends AbstractModule {
+class ConnectionConnectorBean implements ConnectionConnector {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConnectionConnectorBean.class);
+    private final ConnectionPoolBean connectionPool;
+    private final SessionServiceProviderBean sessionServiceProvider;
+
+    @Inject
+    ConnectionConnectorBean(final ConnectionPoolBean connectionPool, final SessionServiceProviderBean sessionService) {
+        this.connectionPool = connectionPool;
+        this.sessionServiceProvider = sessionService;
+    }
 
     @Override
-    protected void configure() {
-        bind(ConnectionConfigurationFactory.class).to(ConnectionConfigurationFactoryBean.class);
-        bind(ConnectionConnector.class).to(ConnectionConnectorBean.class);
+    public void connect(final ConnectionConfiguration connectionConfiguration, final Credentials credentials) {
+        // TODO Completar función
+    }
+
+    @Override
+    public void login() throws SessionLoginException {
+        // TODO Completar función
+    }
+
+    @Override
+    public void logout() {
+        // TODO Completar función
     }
 }
