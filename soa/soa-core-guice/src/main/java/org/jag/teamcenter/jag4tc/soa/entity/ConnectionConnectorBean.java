@@ -24,6 +24,9 @@
 package org.jag.teamcenter.jag4tc.soa.entity;
 
 import com.google.inject.Inject;
+import com.teamcenter.schemas.soa._2006_03.exceptions.InvalidCredentialsException;
+import com.teamcenter.schemas.soa._2006_03.exceptions.ServiceException;
+import com.teamcenter.services.loose.core.SessionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,11 +49,25 @@ class ConnectionConnectorBean implements ConnectionConnector {
 
     @Override
     public void login() throws SessionLoginException {
-        // TODO Completar función
+        final ConnectionBean connectionBean = connectionPool.getConnectionBean();
+        final SessionService sessionService = sessionServiceProvider.getService();
+        final Credentials credentials = connectionBean.getCredentials();
+        try {
+            sessionService.login(credentials.getUsername(), credentials.getPassword(), credentials.getGroup(),
+                    credentials.getRole(), "", connectionBean.getDiscriminator());
+        } catch (InvalidCredentialsException e) {
+            LOGGER.error("An exception happened: {}", e.getMessage());
+            throw new SessionLoginException(credentials, e);
+        }
     }
 
     @Override
     public void logout() {
-        // TODO Completar función
+        final SessionService sessionService = sessionServiceProvider.getService();
+        try {
+            sessionService.logout();
+        } catch (ServiceException e) {
+            LOGGER.error("An exception happened when logging out", e);
+        }
     }
 }
