@@ -25,7 +25,7 @@ package org.jag.teamcenter.jag4tc.soa.entity;
 
 import com.teamcenter.soa.client.Connection;
 
-public class ConnectionBean {
+class ConnectionBean {
 
     private Credentials credentials;
     private Connection connection;

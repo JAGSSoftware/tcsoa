@@ -37,6 +37,8 @@ import org.slf4j.LoggerFactory;
 public class Main {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+    private final ConnectionConfigurationFactory connectionConfigurationFactory;
+    private final ConnectionConnector connectionConnector;
 
     public static void main(String[] args) {
         final Injector injector = Guice.createInjector(new EntityModule());
@@ -45,8 +47,18 @@ public class Main {
                 injector.getInstance(ConnectionConfigurationFactory.class);
         final ConnectionConnector connectionConnector = injector.getInstance(ConnectionConnector.class);
 
-        final ConnectionConfiguration connectionConfiguration =
-                connectionConfigurationFactory.createConnectionConfiguration("http://141.77.189.132:8080/tc", "karaf");
+        new Main(connectionConfigurationFactory, connectionConnector).run();
+    }
+
+    private Main(final ConnectionConfigurationFactory connectionConfigurationFactory,
+            ConnectionConnector connectionConnector) {
+        this.connectionConfigurationFactory = connectionConfigurationFactory;
+        this.connectionConnector = connectionConnector;
+    }
+
+    private void run() {
+        final ConnectionConfiguration connectionConfiguration = connectionConfigurationFactory
+                .createConnectionConfiguration("http://141.77.189.132:8080/tc", "discriminator");
         final Credentials credentials = new Credentials() {
             @Override
             public String getUsername() {
@@ -68,8 +80,8 @@ public class Main {
                 return "";
             }
         };
-        connectionConnector.connect(connectionConfiguration, credentials);
 
+        connectionConnector.connect(connectionConfiguration, credentials);
         try {
             connectionConnector.login();
         } catch (SessionLoginException e) {
