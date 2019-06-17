@@ -23,7 +23,7 @@
  */
 package org.jag.teamcenter.jag4tc.soa.entity;
 
-import com.teamcenter.services.loose.core.SessionService;
+import com.teamcenter.services.strong.core.SessionService;
 import com.teamcenter.soa.SoaConstants;
 import com.teamcenter.soa.client.Connection;
 import com.teamcenter.soa.client.CredentialManager;

@@ -23,8 +23,6 @@
  */
 package org.jag.teamcenter.jag4tc.soa.entity;
 
-import org.jag.teamcenter.jag4tc.soa.entity.ConnectionConfiguration;
-
 abstract class AbstractConnectionConfiguration implements ConnectionConfiguration {
 
     private final String host;

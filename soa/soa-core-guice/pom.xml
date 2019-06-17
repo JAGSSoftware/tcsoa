@@ -25,6 +25,16 @@
             <artifactId>soa-core</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.siemens.teamcenter.soa</groupId>
+            <artifactId>TcSoaCoreStrong</artifactId>
+            <version>11000.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.siemens.teamcenter.soa</groupId>
+            <artifactId>TcSoaStrongModel</artifactId>
+            <version>11000.2.0</version>
+        </dependency>
 
         <dependency>
             <groupId>junit</groupId>
@@ -56,10 +66,10 @@
             <artifactId>commons-httpclient</artifactId>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>
-            <groupId>com.siemens.teamcenter.soa</groupId>
-            <artifactId>tcserverjavabinding</artifactId>
-            <version>11000.2.0</version>
-        </dependency>-->
+        <!--        <dependency>
+                    <groupId>com.siemens.teamcenter.soa</groupId>
+                    <artifactId>tcserverjavabinding</artifactId>
+                    <version>11000.2.0</version>
+                </dependency>-->
     </dependencies>
 </project>

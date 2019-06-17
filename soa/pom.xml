@@ -17,5 +17,6 @@
         <module>soa-core</module>
         <module>soa-core-api</module>
         <module>soa-core-guice</module>
+        <module>soa-client</module>
     </modules>
 </project>

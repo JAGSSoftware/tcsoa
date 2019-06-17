@@ -24,7 +24,7 @@
 package org.jag.teamcenter.jag4tc.soa.entity;
 
 import com.google.inject.Inject;
-import com.teamcenter.services.loose.core.SessionService;
+import com.teamcenter.services.strong.core.SessionService;
 
 class SessionServiceProviderBean {
 

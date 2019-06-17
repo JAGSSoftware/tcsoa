@@ -38,7 +38,7 @@ class ExceptionHandlerBean implements ExceptionHandler {
 
     @Override
     public void handleException(final InternalServerException exception) {
-        LOGGER.info("Exception caught in handleException({})", exception);
+        LOGGER.info("Exception caught in handleException(InternalServerException)", exception);
         if (exception instanceof ConnectionException) {
             LOGGER.warn("The server returned a connection error: {}", exception.getMessage());
         } else if (exception instanceof ProtocolException) {
@@ -51,7 +51,7 @@ class ExceptionHandlerBean implements ExceptionHandler {
 
     @Override
     public void handleException(final CanceledOperationException exception) {
-        LOGGER.info("Exception caught in handleException({})", exception);
+        LOGGER.info("Exception caught in handleException(CanceledOperationException)", exception);
         throw new RuntimeException(exception);
     }
 }

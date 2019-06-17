@@ -26,7 +26,7 @@ package org.jag.teamcenter.jag4tc.soa.entity;
 import com.google.inject.Inject;
 import com.teamcenter.schemas.soa._2006_03.exceptions.InvalidCredentialsException;
 import com.teamcenter.schemas.soa._2006_03.exceptions.ServiceException;
-import com.teamcenter.services.loose.core.SessionService;
+import com.teamcenter.services.strong.core.SessionService;
 import com.teamcenter.soa.SoaConstants;
 import com.teamcenter.soa.client.Connection;
 import org.slf4j.Logger;
