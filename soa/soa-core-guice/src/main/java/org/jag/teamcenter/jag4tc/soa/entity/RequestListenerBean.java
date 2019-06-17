@@ -23,32 +23,22 @@
  */
 package org.jag.teamcenter.jag4tc.soa.entity;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.teamcenter.soa.client.RequestListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-class TccsConnectionConfiguration extends AbstractConnectionConfiguration {
+// TODO Convertir a objeto Guice
+public class RequestListenerBean implements RequestListener {
 
-    protected TccsConnectionConfiguration(final String host, final String discriminator) {
-        super(host, discriminator);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RequestListenerBean.class);
+
+    @Override
+    public void serviceRequest(final Info info) {
+        LOGGER.info("{}: {}.{}", info.id, info.service, info.operation);
     }
 
     @Override
-    public Protocol getProtocol() {
-        return Protocol.TCCS;
-    }
-
-    @Override
-    public String getHost() {
-        return "";
-    }
-
-    public String getEnvName() {
-        final String host = super.getHost();
-
-        final Matcher matcher = Pattern.compile("tccs://(.*)").matcher(host);
-        if (matcher.matches()) {
-            return matcher.group(1);
-        }
-        return "";
+    public void serviceResponse(final Info info) {
+        LOGGER.info("{}: {}.{}", info.id, info.service, info.operation);
     }
 }

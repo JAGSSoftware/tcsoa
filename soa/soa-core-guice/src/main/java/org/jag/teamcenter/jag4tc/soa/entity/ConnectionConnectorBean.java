@@ -27,6 +27,8 @@ import com.google.inject.Inject;
 import com.teamcenter.schemas.soa._2006_03.exceptions.InvalidCredentialsException;
 import com.teamcenter.schemas.soa._2006_03.exceptions.ServiceException;
 import com.teamcenter.services.loose.core.SessionService;
+import com.teamcenter.soa.SoaConstants;
+import com.teamcenter.soa.client.Connection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,7 +46,26 @@ class ConnectionConnectorBean implements ConnectionConnector {
 
     @Override
     public void connect(final ConnectionConfiguration connectionConfiguration, final Credentials credentials) {
-        // TODO Completar función
+        final Connection tcConnection = new Connection(connectionConfiguration.getHost(),
+                new CredentialManagerBean(credentials, connectionConfiguration.getDiscriminator()),
+                SoaConstants.REST, connectionConfiguration.getProtocol().getProtocolValue());
+
+        if (SoaConstants.TCCS.equals(connectionConfiguration.getProtocol().getProtocolValue())) {
+            tcConnection.setOption(Connection.TCCS_ENV_NAME,
+                    ((TccsConnectionConfiguration) connectionConfiguration).getEnvName());
+        }
+        // TODO Inyectar dependencias con Guice
+        tcConnection.setExceptionHandler(new ExceptionHandlerBean());
+        tcConnection.getModelManager().addPartialErrorListener(new PartialErrorListenerBean());
+        tcConnection.getModelManager().addModelEventListener(new ModelEventListenerBean());
+        Connection.addRequestListener(new RequestListenerBean());
+
+        final ConnectionBean connection = new ConnectionBean();
+        connection.setConnection(tcConnection);
+        connection.setCredentials(credentials);
+        connection.setDiscriminator(connectionConfiguration.getDiscriminator());
+
+        connectionPool.setConnectionBean(connection);
     }
 
     @Override

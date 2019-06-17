@@ -23,8 +23,6 @@
  */
 package org.jag.teamcenter.jag4tc.soa.entity;
 
-import org.jag.teamcenter.jag4tc.soa.entity.IiopConnectionConfiguration;
-import org.jag.teamcenter.jag4tc.soa.entity.Protocol;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,11 +34,16 @@ public class IiopConnectionConfigurationTest {
 
     @Before
     public void setUp() {
-        underTest = new IiopConnectionConfiguration("http://com.host", "discriminator");
+        underTest = new IiopConnectionConfiguration("iiop://com.host", "discriminator");
     }
 
     @Test
     public void getProtocol() {
         assertThat(underTest.getProtocol()).isEqualTo(Protocol.IIOP);
+    }
+
+    @Test
+    public void getHost() {
+        assertThat(underTest.getHost()).isEqualTo("iiop://com.host");
     }
 }

@@ -23,8 +23,6 @@
  */
 package org.jag.teamcenter.jag4tc.soa.entity;
 
-import org.jag.teamcenter.jag4tc.soa.entity.Protocol;
-import org.jag.teamcenter.jag4tc.soa.entity.TccsConnectionConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,11 +34,28 @@ public class TccsConnectionConfigurationTest {
 
     @Before
     public void setUp() {
-        underTest = new TccsConnectionConfiguration("http://com.host", "discriminator");
+        underTest = new TccsConnectionConfiguration("tccs://com.host:8080/tc", "discriminator");
     }
 
     @Test
     public void getProtocol() {
         assertThat(underTest.getProtocol()).isEqualTo(Protocol.TCCS);
+    }
+
+    @Test
+    public void getHost() {
+        assertThat(underTest.getHost()).isEqualTo("");
+    }
+
+    @Test
+    public void getEnvName() {
+        assertThat(underTest.getEnvName()).isEqualTo("com.host:8080/tc");
+    }
+
+    @Test
+    public void getEnvNameWithAnyOtherHost() {
+        final TccsConnectionConfiguration connectionConfiguration =
+                new TccsConnectionConfiguration("http://com.host:8080/tc", "discriminator");
+        assertThat(connectionConfiguration.getEnvName()).isEmpty();
     }
 }

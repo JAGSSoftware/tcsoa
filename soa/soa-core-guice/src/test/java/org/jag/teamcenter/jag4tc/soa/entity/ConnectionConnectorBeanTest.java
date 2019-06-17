@@ -23,22 +23,36 @@
  */
 package org.jag.teamcenter.jag4tc.soa.entity;
 
+import com.teamcenter.schemas.soa._2006_03.exceptions.InvalidCredentialsException;
 import com.teamcenter.schemas.soa._2006_03.exceptions.ServiceException;
 import com.teamcenter.services.loose.core.SessionService;
+import com.teamcenter.soa.client.Connection;
+import com.teamcenter.soa.exceptions.CanceledOperationException;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ConnectionConnectorBeanTest {
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @InjectMocks
     private ConnectionConnectorBean underTest;
@@ -49,16 +63,102 @@ public class ConnectionConnectorBeanTest {
     @Mock
     private SessionServiceProviderBean sessionServiceProviderBean;
 
+    @Captor
+    private ArgumentCaptor<ConnectionBean> connectionBeanCaptor;
+
     @Test
-    @Ignore("Not yet implemented")
-    public void connect() {
+    public void connectHttp() throws CanceledOperationException {
+        final ConnectionConfiguration connectionConfiguration = mock(ConnectionConfiguration.class);
+        final Credentials credentials = mock(Credentials.class);
+
+        when(connectionConfiguration.getHost()).thenReturn("http://tc.host.com");
+        when(connectionConfiguration.getDiscriminator()).thenReturn("App-X-Discriminator");
+        when(connectionConfiguration.getProtocol()).thenReturn(Protocol.HTTP);
+
+        underTest.connect(connectionConfiguration, credentials);
+
+        verify(connectionPoolBean).setConnectionBean(connectionBeanCaptor.capture());
+
+        final ConnectionBean connectionBean = connectionBeanCaptor.getValue();
+        final Connection connection = connectionBean.getConnection();
+        assertThat(connection.getHostPath(), equalTo("http://tc.host.com/"));
+        assertThat(connection.getDiscriminator(), equalTo("App-X-Discriminator"));
+        assertThat(connectionBean.getCredentials(), equalTo(credentials));
+        assertThat(connectionBean.getDiscriminator(), equalTo("App-X-Discriminator"));
+    }
+
+    @Test
+    @Ignore("Requires updating the dependencies")
+    public void connectTccs() throws CanceledOperationException {
+        final ConnectionConfiguration connectionConfiguration = mock(TccsConnectionConfiguration.class);
+        final Credentials credentials = mock(Credentials.class);
+
+        when(connectionConfiguration.getHost()).thenReturn("tccs://tc.host.com:8080/tc");
+        when(connectionConfiguration.getDiscriminator()).thenReturn("App-X-Discriminator");
+        when(connectionConfiguration.getProtocol()).thenReturn(Protocol.TCCS);
+
+        underTest.connect(connectionConfiguration, credentials);
+
+        verify((TccsConnectionConfiguration) connectionConfiguration).getEnvName();
+
+        verify(connectionPoolBean).setConnectionBean(connectionBeanCaptor.capture());
+
+        final ConnectionBean connectionBean = connectionBeanCaptor.getValue();
+        final Connection connection = connectionBean.getConnection();
+        assertThat(connection.getHostPath(), equalTo("tccs://tc.host.com:8080/tc/"));
+        assertThat(connection.getDiscriminator(), equalTo("App-X-Discriminator"));
+        assertThat(connectionBean.getCredentials(), equalTo(credentials));
+        assertThat(connectionBean.getDiscriminator(), equalTo("App-X-Discriminator"));
         fail("Not yet implemented");
     }
 
     @Test
-    @Ignore("Not yet implemented")
-    public void login() {
-        fail("Not yet implemented");
+    public void login() throws SessionLoginException, InvalidCredentialsException {
+        final ConnectionBean connectionBean = mock(ConnectionBean.class);
+        final Credentials credentials = mock(Credentials.class);
+        final SessionService sessionService = mock(SessionService.class);
+
+        when(connectionPoolBean.getConnectionBean()).thenReturn(connectionBean);
+        when(connectionBean.getCredentials()).thenReturn(credentials);
+        when(connectionBean.getDiscriminator()).thenReturn("App-X-Discriminator");
+        when(sessionServiceProviderBean.getService()).thenReturn(sessionService);
+        when(credentials.getUsername()).thenReturn("MyUsername");
+        when(credentials.getPassword()).thenReturn("MyPassword");
+        when(credentials.getGroup()).thenReturn("MyGroup");
+        when(credentials.getRole()).thenReturn("MyRole");
+
+        underTest.login();
+
+        verify(connectionBean).getCredentials();
+        verify(connectionBean).getDiscriminator();
+        verify(sessionService).login(eq("MyUsername"), eq("MyPassword"), eq("MyGroup"), eq("MyRole"),
+                eq(""), eq("App-X-Discriminator"));
+    }
+
+    @Test
+    public void loginWithException() throws InvalidCredentialsException, SessionLoginException {
+        final ConnectionBean connectionBean = mock(ConnectionBean.class);
+        final Credentials credentials = mock(Credentials.class);
+        final SessionService sessionService = mock(SessionService.class);
+
+        when(connectionPoolBean.getConnectionBean()).thenReturn(connectionBean);
+        when(connectionBean.getCredentials()).thenReturn(credentials);
+        when(connectionBean.getDiscriminator()).thenReturn("App-X-Discriminator");
+        when(sessionServiceProviderBean.getService()).thenReturn(sessionService);
+        when(credentials.getUsername()).thenReturn("MyUsername");
+        when(credentials.getPassword()).thenReturn("MyPassword");
+        when(credentials.getGroup()).thenReturn("MyGroup");
+        when(credentials.getRole()).thenReturn("MyRole");
+        when(sessionService.login(anyString(), anyString(), anyString(), anyString(), anyString(), anyString()))
+                .thenThrow(new InvalidCredentialsException("Fake exception"));
+
+        expectedException.expect(SessionLoginException.class);
+        expectedException.expectMessage("Fake exception");
+
+        underTest.login();
+
+        verify(connectionBean).getCredentials();
+        verify(connectionBean).getDiscriminator();
     }
 
     @Test

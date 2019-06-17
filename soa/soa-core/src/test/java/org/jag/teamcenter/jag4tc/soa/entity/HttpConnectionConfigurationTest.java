@@ -23,8 +23,6 @@
  */
 package org.jag.teamcenter.jag4tc.soa.entity;
 
-import org.jag.teamcenter.jag4tc.soa.entity.HttpConnectionConfiguration;
-import org.jag.teamcenter.jag4tc.soa.entity.Protocol;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,5 +40,10 @@ public class HttpConnectionConfigurationTest {
     @Test
     public void getProtocol() {
         assertThat(underTest.getProtocol()).isEqualTo(Protocol.HTTP);
+    }
+
+    @Test
+    public void getHost() {
+        assertThat(underTest.getHost()).isEqualTo("http://com.host");
     }
 }
