@@ -41,7 +41,6 @@
     <modules>
         <module>soa</module>
         <module>dispatcher</module>
-        <module>util</module>
     </modules>
 
     <dependencyManagement>
