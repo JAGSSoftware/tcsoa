@@ -29,8 +29,7 @@ import com.teamcenter.soa.exceptions.NotLoadedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-// TODO Convertir a objeto Guice
-public class ModelEventListenerBean extends ModelEventListener {
+class ModelEventListenerBean extends ModelEventListener {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ModelEventListenerBean.class);
 

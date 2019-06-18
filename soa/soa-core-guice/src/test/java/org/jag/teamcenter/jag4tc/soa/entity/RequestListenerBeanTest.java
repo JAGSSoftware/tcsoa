@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2019 José A. García Sánchez
+ * Copyright (c) 2018 José A. García Sánchez
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,22 +23,32 @@
  */
 package org.jag.teamcenter.jag4tc.soa.entity;
 
-import com.google.inject.AbstractModule;
-import com.teamcenter.soa.client.ExceptionHandler;
 import com.teamcenter.soa.client.RequestListener;
-import com.teamcenter.soa.client.model.ModelEventListener;
-import com.teamcenter.soa.client.model.PartialErrorListener;
+import org.junit.Before;
+import org.junit.Test;
 
-public class EntityModule extends AbstractModule {
+public class RequestListenerBeanTest {
 
-    @Override
-    protected void configure() {
-        bind(ExceptionHandler.class).to(ExceptionHandlerBean.class);
-        bind(PartialErrorListener.class).to(PartialErrorListenerBean.class);
-        bind(ModelEventListener.class).to(ModelEventListenerBean.class);
-        bind(RequestListener.class).to(RequestListenerBean.class);
+    private RequestListenerBean underTest;
 
-        bind(ConnectionConfigurationFactory.class).to(ConnectionConfigurationFactoryBean.class);
-        bind(ConnectionConnector.class).to(ConnectionConnectorBean.class);
+    @Before
+    public void setUp() {
+        underTest = new RequestListenerBean();
+    }
+
+    @Test
+    public void serviceRequest() {
+        final RequestListener.Info info = new RequestListener.Info("Id#0001", "ServiceId", "Operation",
+                RequestListenerBeanTest.class.getName());
+
+        underTest.serviceRequest(info);
+    }
+
+    @Test
+    public void serviceResponse() {
+        final RequestListener.Info info = new RequestListener.Info("Id#0001", "ServiceId", "Operation",
+                RequestListenerBeanTest.class.getName());
+
+        underTest.serviceResponse(info);
     }
 }

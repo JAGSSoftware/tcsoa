@@ -27,6 +27,8 @@ import com.teamcenter.schemas.soa._2006_03.exceptions.InvalidCredentialsExceptio
 import com.teamcenter.schemas.soa._2006_03.exceptions.ServiceException;
 import com.teamcenter.services.strong.core.SessionService;
 import com.teamcenter.soa.client.Connection;
+import com.teamcenter.soa.client.model.ModelEventListener;
+import com.teamcenter.soa.client.model.PartialErrorListener;
 import com.teamcenter.soa.exceptions.CanceledOperationException;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -57,11 +59,19 @@ public class ConnectionConnectorBeanTest {
     @InjectMocks
     private ConnectionConnectorBean underTest;
 
+    // FIXME It should be an object, not a mock
     @Mock
     private ConnectionPoolBean connectionPoolBean;
 
+    // FIXME It should be an object, not a mock
     @Mock
     private SessionServiceProviderBean sessionServiceProviderBean;
+
+    @Mock
+    private PartialErrorListener partialErrorListener;
+
+    @Mock
+    private ModelEventListener modelEventListener;
 
     @Captor
     private ArgumentCaptor<ConnectionBean> connectionBeanCaptor;

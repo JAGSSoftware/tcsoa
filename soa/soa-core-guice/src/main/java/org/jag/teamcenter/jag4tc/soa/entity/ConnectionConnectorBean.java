@@ -29,20 +29,33 @@ import com.teamcenter.schemas.soa._2006_03.exceptions.ServiceException;
 import com.teamcenter.services.strong.core.SessionService;
 import com.teamcenter.soa.SoaConstants;
 import com.teamcenter.soa.client.Connection;
+import com.teamcenter.soa.client.ExceptionHandler;
+import com.teamcenter.soa.client.RequestListener;
+import com.teamcenter.soa.client.model.ModelEventListener;
+import com.teamcenter.soa.client.model.PartialErrorListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 class ConnectionConnectorBean implements ConnectionConnector {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ConnectionConnectorBean.class);
-    private final ConnectionPoolBean connectionPool;
-    private final SessionServiceProviderBean sessionServiceProvider;
+    @Inject
+    private ConnectionPoolBean connectionPool;
 
     @Inject
-    ConnectionConnectorBean(final ConnectionPoolBean connectionPool, final SessionServiceProviderBean sessionService) {
-        this.connectionPool = connectionPool;
-        this.sessionServiceProvider = sessionService;
-    }
+    private SessionServiceProviderBean sessionServiceProvider;
+
+    @Inject
+    private ExceptionHandler exceptionHandler;
+
+    @Inject
+    private PartialErrorListener partialErrorListener;
+
+    @Inject
+    private ModelEventListener modelEventListener;
+
+    @Inject
+    private RequestListener requestListener;
 
     @Override
     public void connect(final ConnectionConfiguration connectionConfiguration, final Credentials credentials) {
@@ -54,11 +67,10 @@ class ConnectionConnectorBean implements ConnectionConnector {
             tcConnection.setOption(Connection.TCCS_ENV_NAME,
                     ((TccsConnectionConfiguration) connectionConfiguration).getEnvName());
         }
-        // TODO Inyectar dependencias con Guice
-        tcConnection.setExceptionHandler(new ExceptionHandlerBean());
-        tcConnection.getModelManager().addPartialErrorListener(new PartialErrorListenerBean());
-        tcConnection.getModelManager().addModelEventListener(new ModelEventListenerBean());
-        Connection.addRequestListener(new RequestListenerBean());
+        tcConnection.setExceptionHandler(exceptionHandler);
+        tcConnection.getModelManager().addPartialErrorListener(partialErrorListener);
+        tcConnection.getModelManager().addModelEventListener(modelEventListener);
+        Connection.addRequestListener(requestListener);
 
         final ConnectionBean connection = new ConnectionBean();
         connection.setConnection(tcConnection);

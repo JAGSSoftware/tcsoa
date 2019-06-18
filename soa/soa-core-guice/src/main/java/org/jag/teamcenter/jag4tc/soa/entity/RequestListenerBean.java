@@ -27,8 +27,7 @@ import com.teamcenter.soa.client.RequestListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-// TODO Convertir a objeto Guice
-public class RequestListenerBean implements RequestListener {
+class RequestListenerBean implements RequestListener {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RequestListenerBean.class);
 

@@ -29,8 +29,7 @@ import com.teamcenter.soa.client.model.PartialErrorListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-// TODO Convertir a objeto Guice
-public class PartialErrorListenerBean implements PartialErrorListener {
+class PartialErrorListenerBean implements PartialErrorListener {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PartialErrorListenerBean.class);
 
