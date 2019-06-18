@@ -17,6 +17,15 @@
         <module>soa-core</module>
         <module>soa-core-api</module>
         <module>soa-core-guice</module>
-        <module>soa-client</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>commons-httpclient</groupId>
+                <artifactId>commons-httpclient</artifactId>
+                <version>3.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
