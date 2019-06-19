@@ -25,6 +25,7 @@ package org.jag.teamcenter.jag4tc.soa.client;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import org.jag.teamcenter.jag4tc.soa.boundary.CommandLineClientModule;
 import org.jag.teamcenter.jag4tc.soa.entity.ConnectionConfiguration;
 import org.jag.teamcenter.jag4tc.soa.entity.ConnectionConfigurationFactory;
 import org.jag.teamcenter.jag4tc.soa.entity.ConnectionConnector;
@@ -41,7 +42,7 @@ public class Main {
     private final ConnectionConnector connectionConnector;
 
     public static void main(String[] args) {
-        final Injector injector = Guice.createInjector(new EntityModule());
+        final Injector injector = Guice.createInjector(new EntityModule(), new CommandLineClientModule());
 
         final ConnectionConfigurationFactory connectionConfigurationFactory =
                 injector.getInstance(ConnectionConfigurationFactory.class);
