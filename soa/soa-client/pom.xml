@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>org.jag.teamcenter.jag4tc</groupId>
-            <artifactId>soa-core-guice</artifactId>
+            <artifactId>soa-core</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
