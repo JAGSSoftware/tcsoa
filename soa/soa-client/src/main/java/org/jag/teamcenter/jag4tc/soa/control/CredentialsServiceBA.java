@@ -21,9 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.jag.teamcenter.jag4tc.soa.boundary;
+package org.jag.teamcenter.jag4tc.soa.control;
 
-public interface ArgumentsServiceBF {
+import org.jag.teamcenter.jag4tc.soa.entity.Credentials;
 
-    Arguments parse(String[] args);
+public interface CredentialsServiceBA {
+
+    Credentials getCredentialsFrom(Arguments arguments);
 }

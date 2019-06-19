@@ -21,11 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.jag.teamcenter.jag4tc.soa.client;
+package org.jag.teamcenter.jag4tc.soa;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import org.jag.teamcenter.jag4tc.soa.boundary.CommandLineClientModule;
+import org.jag.teamcenter.jag4tc.soa.boundary.ClientServiceBF;
+import org.jag.teamcenter.jag4tc.soa.boundary.BoundaryClientModule;
+import org.jag.teamcenter.jag4tc.soa.control.Arguments;
+import org.jag.teamcenter.jag4tc.soa.control.ControlClientModule;
 import org.jag.teamcenter.jag4tc.soa.entity.ConnectionConfiguration;
 import org.jag.teamcenter.jag4tc.soa.entity.ConnectionConfigurationFactory;
 import org.jag.teamcenter.jag4tc.soa.entity.ConnectionConnector;
@@ -38,49 +41,36 @@ import org.slf4j.LoggerFactory;
 public class Main {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+    private final ClientServiceBF clientService;
+    private final Arguments arguments;
     private final ConnectionConfigurationFactory connectionConfigurationFactory;
     private final ConnectionConnector connectionConnector;
 
     public static void main(String[] args) {
-        final Injector injector = Guice.createInjector(new EntityModule(), new CommandLineClientModule());
+        final Injector injector =
+                Guice.createInjector(new EntityModule(), new BoundaryClientModule(), new ControlClientModule());
 
         final ConnectionConfigurationFactory connectionConfigurationFactory =
                 injector.getInstance(ConnectionConfigurationFactory.class);
         final ConnectionConnector connectionConnector = injector.getInstance(ConnectionConnector.class);
+        final ClientServiceBF clientService = injector.getInstance(ClientServiceBF.class);
 
-        new Main(connectionConfigurationFactory, connectionConnector).run();
+        new Main(clientService, clientService.parse(args), connectionConfigurationFactory, connectionConnector).run();
     }
 
-    private Main(final ConnectionConfigurationFactory connectionConfigurationFactory,
+    private Main(final ClientServiceBF clientService, final Arguments arguments,
+            final ConnectionConfigurationFactory connectionConfigurationFactory,
             ConnectionConnector connectionConnector) {
+        this.clientService = clientService;
+        this.arguments = arguments;
         this.connectionConfigurationFactory = connectionConfigurationFactory;
         this.connectionConnector = connectionConnector;
     }
 
     private void run() {
         final ConnectionConfiguration connectionConfiguration = connectionConfigurationFactory
-                .createConnectionConfiguration("http://141.77.189.132:8080/tc", "discriminator");
-        final Credentials credentials = new Credentials() {
-            @Override
-            public String getUsername() {
-                return "infodba";
-            }
-
-            @Override
-            public String getPassword() {
-                return "infodba";
-            }
-
-            @Override
-            public String getGroup() {
-                return "";
-            }
-
-            @Override
-            public String getRole() {
-                return "";
-            }
-        };
+                .createConnectionConfiguration(arguments.getHost(), "discriminator");
+        final Credentials credentials = clientService.getCredentialsFrom(arguments);
 
         connectionConnector.connect(connectionConfiguration, credentials);
         try {

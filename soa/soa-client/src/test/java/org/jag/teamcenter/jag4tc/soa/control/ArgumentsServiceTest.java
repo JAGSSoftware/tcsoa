@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.jag.teamcenter.jag4tc.soa.boundary;
+package org.jag.teamcenter.jag4tc.soa.control;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

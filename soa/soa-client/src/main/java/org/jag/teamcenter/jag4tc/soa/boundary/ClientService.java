@@ -23,11 +23,27 @@
  */
 package org.jag.teamcenter.jag4tc.soa.boundary;
 
-import com.google.inject.AbstractModule;
+import com.google.inject.Inject;
+import org.jag.teamcenter.jag4tc.soa.control.Arguments;
+import org.jag.teamcenter.jag4tc.soa.control.ArgumentsServiceBA;
+import org.jag.teamcenter.jag4tc.soa.control.CredentialsServiceBA;
+import org.jag.teamcenter.jag4tc.soa.entity.Credentials;
 
-public class CommandLineClientModule extends AbstractModule {
+class ClientService implements ClientServiceBF {
 
-    protected void configure() {
-        bind(ArgumentsServiceBF.class).to(ArgumentsService.class);
+    @Inject
+    private ArgumentsServiceBA argumentsService;
+
+    @Inject
+    private CredentialsServiceBA credentialsService;
+
+    @Override
+    public Arguments parse(final String[] args) {
+        return argumentsService.parse(args);
+    }
+
+    @Override
+    public Credentials getCredentialsFrom(final Arguments arguments) {
+        return credentialsService.getCredentialsFrom(arguments);
     }
 }

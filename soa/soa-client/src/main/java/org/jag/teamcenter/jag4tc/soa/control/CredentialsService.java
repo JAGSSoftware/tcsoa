@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 José A. García Sánchez
+ * Copyright (c) 2019 José A. García Sánchez
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,54 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.jag.teamcenter.jag4tc.soa.entity;
+package org.jag.teamcenter.jag4tc.soa.control;
 
-class CredentialsBean implements Credentials {
+import org.jag.teamcenter.jag4tc.soa.entity.Credentials;
 
-    private String username;
-    private String password;
-    private String group;
-    private String role;
+class CredentialsService implements CredentialsServiceBA {
 
     @Override
-    public String getUsername() {
-        return username;
-    }
+    public Credentials getCredentialsFrom(final Arguments arguments) {
+        final CredentialsBean credentialsBean = new CredentialsBean();
+        credentialsBean.setUsername(arguments.getUsername());
+        credentialsBean.setPassword(arguments.getPassword());
+        credentialsBean.setGroup(arguments.getGroup());
+        credentialsBean.setRole(arguments.getRole());
 
-    public void setUsername(final String username) {
-        this.username = username;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(final String password) {
-        this.password = password;
-    }
-
-    @Override
-    public String getGroup() {
-        return group;
-    }
-
-    public void setGroup(final String group) {
-        this.group = group;
-    }
-
-    @Override
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(final String role) {
-        this.role = role;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s{username: [%s], password: [%s], group: [%s], role: [%s]}",
-                getClass().getSimpleName(), username, "********", group, role);
+        return credentialsBean;
     }
 }

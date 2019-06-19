@@ -23,51 +23,11 @@
  */
 package org.jag.teamcenter.jag4tc.soa.boundary;
 
-public class Arguments {
+import com.google.inject.AbstractModule;
 
-    private String host;
-    private String username;
-    private String password;
-    private String group;
-    private String role;
+public class BoundaryClientModule extends AbstractModule {
 
-    public String getHost() {
-        return host;
-    }
-
-    void setHost(final String host) {
-        this.host = host;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    void setUsername(final String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    void setPassword(final String password) {
-        this.password = password;
-    }
-
-    public String getGroup() {
-        return group;
-    }
-
-    void setGroup(final String group) {
-        this.group = group;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    void setRole(final String role) {
-        this.role = role;
+    protected void configure() {
+        bind(ClientServiceBF.class).to(ClientService.class);
     }
 }

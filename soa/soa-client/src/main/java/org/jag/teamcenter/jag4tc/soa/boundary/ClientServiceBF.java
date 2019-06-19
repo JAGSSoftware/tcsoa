@@ -23,14 +23,12 @@
  */
 package org.jag.teamcenter.jag4tc.soa.boundary;
 
-import com.google.inject.Singleton;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Options;
+import org.jag.teamcenter.jag4tc.soa.control.Arguments;
+import org.jag.teamcenter.jag4tc.soa.entity.Credentials;
 
-@Singleton
-class OptionsHelpFormatter {
+public interface ClientServiceBF {
 
-    public void printHelp(final String cmdLineSyntax, final Options options) {
-        new HelpFormatter().printHelp(cmdLineSyntax, options);
-    }
+    Arguments parse(String[] args);
+
+    Credentials getCredentialsFrom(Arguments arguments);
 }

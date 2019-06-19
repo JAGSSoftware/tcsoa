@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.jag.teamcenter.jag4tc.soa.boundary;
+package org.jag.teamcenter.jag4tc.soa.control;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-class ArgumentsService implements ArgumentsServiceBF {
+class ArgumentsService implements ArgumentsServiceBA {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ArgumentsService.class);
 

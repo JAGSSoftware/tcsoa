@@ -21,49 +21,56 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.jag.teamcenter.jag4tc.soa.entity;
+package org.jag.teamcenter.jag4tc.soa.control;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.jag.teamcenter.jag4tc.soa.entity.Credentials;
 
-import static org.assertj.core.api.Assertions.assertThat;
+class CredentialsBean implements Credentials {
 
-public class CredentialsBeanTest {
+    private String username;
+    private String password;
+    private String group;
+    private String role;
 
-    private CredentialsBean underTest;
-
-    @Before
-    public void setUp() {
-        underTest = new CredentialsBean();
-        underTest.setUsername("MyUsername");
-        underTest.setPassword("MyPassword");
-        underTest.setGroup("MyGroup");
-        underTest.setRole("MyRole");
+    @Override
+    public String getUsername() {
+        return username;
     }
 
-    @Test
-    public void getUsername() {
-        assertThat(underTest.getUsername()).isEqualTo("MyUsername");
+    void setUsername(final String username) {
+        this.username = username;
     }
 
-    @Test
-    public void getPassword() {
-        assertThat(underTest.getPassword()).isEqualTo("MyPassword");
+    @Override
+    public String getPassword() {
+        return password;
     }
 
-    @Test
-    public void getGroup() {
-        assertThat(underTest.getGroup()).isEqualTo("MyGroup");
+    void setPassword(final String password) {
+        this.password = password;
     }
 
-    @Test
-    public void getRole() {
-        assertThat(underTest.getRole()).isEqualTo("MyRole");
+    @Override
+    public String getGroup() {
+        return group;
     }
 
-    @Test
-    public void testToString() {
-        assertThat(underTest.toString()).isEqualTo(
-                "CredentialsBean{username: [MyUsername], password: [********], group: [MyGroup], role: [MyRole]}");
+    void setGroup(final String group) {
+        this.group = group;
+    }
+
+    @Override
+    public String getRole() {
+        return role;
+    }
+
+    void setRole(final String role) {
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s{username: [%s], password: [%s], group: [%s], role: [%s]}",
+                getClass().getSimpleName(), username, "********", group, role);
     }
 }
