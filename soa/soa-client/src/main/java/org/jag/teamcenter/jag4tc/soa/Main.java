@@ -23,6 +23,8 @@
  */
 package org.jag.teamcenter.jag4tc.soa;
 
+import java.util.Arrays;
+
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.jag.teamcenter.jag4tc.soa.boundary.BoundaryClientModule;
@@ -62,7 +64,7 @@ public class Main {
             final ConnectionConfigurationFactory connectionConfigurationFactory,
             ConnectionConnector connectionConnector) {
         this.clientService = clientService;
-        this.args = arguments;
+        this.args = Arrays.copyOf(arguments, arguments.length);
         this.connectionConfigurationFactory = connectionConfigurationFactory;
         this.connectionConnector = connectionConnector;
     }
