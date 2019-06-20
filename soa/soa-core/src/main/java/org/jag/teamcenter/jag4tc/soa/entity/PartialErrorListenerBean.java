@@ -45,7 +45,7 @@ class PartialErrorListenerBean implements PartialErrorListener {
             if (errorStack.hasAssociatedObject()) {
                 LOGGER.warn("object {}", errorStack.getAssociatedObject().getUid());
             } else if (errorStack.hasClientId()) {
-                LOGGER.warn("client id {}", errorStack.hasClientId());
+                LOGGER.warn("client id {}", errorStack.getClientId());
             } else if (errorStack.hasClientIndex()) {
                 LOGGER.warn("client index {}", errorStack.getClientIndex());
             }

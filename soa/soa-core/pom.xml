@@ -82,5 +82,17 @@
             <artifactId>log4j</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.siemens.teamcenter</groupId>
+            <artifactId>tcserverjavabinding</artifactId>
+            <version>20150712</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.siemens.teamcenter.fms</groupId>
+            <artifactId>fscclient</artifactId>
+            <version>20150712</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>
