@@ -25,8 +25,8 @@ package org.jag.teamcenter.jag4tc.soa;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import org.jag.teamcenter.jag4tc.soa.boundary.ClientServiceBF;
 import org.jag.teamcenter.jag4tc.soa.boundary.BoundaryClientModule;
+import org.jag.teamcenter.jag4tc.soa.boundary.ClientServiceBF;
 import org.jag.teamcenter.jag4tc.soa.control.Arguments;
 import org.jag.teamcenter.jag4tc.soa.control.ControlClientModule;
 import org.jag.teamcenter.jag4tc.soa.entity.ConnectionConfiguration;
@@ -42,7 +42,7 @@ public class Main {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     private final ClientServiceBF clientService;
-    private final Arguments arguments;
+    private final String[] args;
     private final ConnectionConfigurationFactory connectionConfigurationFactory;
     private final ConnectionConnector connectionConnector;
 
@@ -55,19 +55,20 @@ public class Main {
         final ConnectionConnector connectionConnector = injector.getInstance(ConnectionConnector.class);
         final ClientServiceBF clientService = injector.getInstance(ClientServiceBF.class);
 
-        new Main(clientService, clientService.parse(args), connectionConfigurationFactory, connectionConnector).run();
+        new Main(clientService, args, connectionConfigurationFactory, connectionConnector).run();
     }
 
-    private Main(final ClientServiceBF clientService, final Arguments arguments,
+    public Main(final ClientServiceBF clientService, final String[] arguments,
             final ConnectionConfigurationFactory connectionConfigurationFactory,
             ConnectionConnector connectionConnector) {
         this.clientService = clientService;
-        this.arguments = arguments;
+        this.args = arguments;
         this.connectionConfigurationFactory = connectionConfigurationFactory;
         this.connectionConnector = connectionConnector;
     }
 
-    private void run() {
+    public void run() {
+        final Arguments arguments = clientService.parse(args);
         final ConnectionConfiguration connectionConfiguration = connectionConfigurationFactory
                 .createConnectionConfiguration(arguments.getHost(), "discriminator");
         final Credentials credentials = clientService.getCredentialsFrom(arguments);
@@ -75,10 +76,9 @@ public class Main {
         connectionConnector.connect(connectionConfiguration, credentials);
         try {
             connectionConnector.login();
+            connectionConnector.logout();
         } catch (SessionLoginException e) {
             LOGGER.info("Exception happened by login", e);
         }
-
-        connectionConnector.logout();
     }
 }

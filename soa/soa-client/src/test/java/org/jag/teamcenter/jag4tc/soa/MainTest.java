@@ -23,18 +23,85 @@
  */
 package org.jag.teamcenter.jag4tc.soa;
 
-import org.junit.Ignore;
+import com.teamcenter.schemas.soa._2006_03.exceptions.InvalidCredentialsException;
+import org.jag.teamcenter.jag4tc.soa.boundary.ClientServiceBF;
+import org.jag.teamcenter.jag4tc.soa.control.Arguments;
+import org.jag.teamcenter.jag4tc.soa.entity.ConnectionConfiguration;
+import org.jag.teamcenter.jag4tc.soa.entity.ConnectionConfigurationFactory;
+import org.jag.teamcenter.jag4tc.soa.entity.ConnectionConnector;
+import org.jag.teamcenter.jag4tc.soa.entity.Credentials;
+import org.jag.teamcenter.jag4tc.soa.entity.SessionLoginException;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.fail;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-@Ignore("Not yet implemented")
+@RunWith(MockitoJUnitRunner.class)
 public class MainTest {
 
-    @Test
-    public void test() {
-        Main.main(new String[]{"-host", "http://blabla.com", "-u", "infodba", "-p", "infodba"});
+    private Main main;
+    @Mock
+    private ClientServiceBF clientService;
+    @Mock
+    private ConnectionConfigurationFactory connectionConfigurationFactory;
+    @Mock
+    private ConnectionConnector connectionConnector;
+    private final String[] args = {};
 
-        fail("Not yet implemented");
+    @Before
+    public void setUp() {
+
+        main = new Main(clientService, args, connectionConfigurationFactory, connectionConnector);
+    }
+
+    @Test
+    public void test() throws SessionLoginException {
+        final Arguments arguments = mock(Arguments.class);
+        final ConnectionConfiguration connectionConfiguration = mock(ConnectionConfiguration.class);
+        final Credentials credentials = mock(Credentials.class);
+
+        when(clientService.parse(any(String[].class))).thenReturn(arguments);
+        when(arguments.getHost()).thenReturn("tccs://host");
+        when(connectionConfigurationFactory.createConnectionConfiguration(anyString(), anyString()))
+                .thenReturn(connectionConfiguration);
+        when(clientService.getCredentialsFrom(eq(arguments))).thenReturn(credentials);
+
+        main.run();
+
+        verify(clientService).parse(eq(args));
+        verify(connectionConnector).connect(eq(connectionConfiguration), eq(credentials));
+        verify(connectionConnector).login();
+        verify(connectionConnector).logout();
+    }
+
+    @Test
+    public void testWithLoginException() throws SessionLoginException {
+        final Arguments arguments = mock(Arguments.class);
+        final ConnectionConfiguration connectionConfiguration = mock(ConnectionConfiguration.class);
+        final Credentials credentials = mock(Credentials.class);
+
+        when(clientService.parse(any(String[].class))).thenReturn(arguments);
+        when(arguments.getHost()).thenReturn("tccs://host");
+        when(connectionConfigurationFactory.createConnectionConfiguration(anyString(), anyString()))
+                .thenReturn(connectionConfiguration);
+        when(clientService.getCredentialsFrom(eq(arguments))).thenReturn(credentials);
+        doThrow(new SessionLoginException(credentials, new InvalidCredentialsException("Fake exception")))
+                .when(connectionConnector).login();
+
+        main.run();
+
+        verify(connectionConnector).connect(eq(connectionConfiguration), eq(credentials));
+        verify(connectionConnector).login();
+        verify(connectionConnector, never()).logout();
     }
 }
