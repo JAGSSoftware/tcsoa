@@ -104,4 +104,20 @@ public class MainTest {
         verify(connectionConnector).login();
         verify(connectionConnector, never()).logout();
     }
+
+    @Test
+    public void runWithNullArguments() throws SessionLoginException {
+        final ConnectionConfiguration connectionConfiguration = mock(ConnectionConfiguration.class);
+        final Credentials credentials = mock(Credentials.class);
+
+        when(clientService.parse(any(String[].class))).thenReturn(null);
+
+        main.run();
+
+        verify(connectionConfigurationFactory, never()).createConnectionConfiguration(anyString(), anyString());
+        verify(clientService, never()).getCredentialsFrom(any(Arguments.class));
+        verify(connectionConnector, never()).connect(eq(connectionConfiguration), eq(credentials));
+        verify(connectionConnector, never()).login();
+        verify(connectionConnector, never()).logout();
+    }
 }

@@ -71,6 +71,9 @@ public class Main {
 
     public void run() {
         final Arguments arguments = clientService.parse(args);
+        if (arguments == null) {
+            return;
+        }
         final ConnectionConfiguration connectionConfiguration = connectionConfigurationFactory
                 .createConnectionConfiguration(arguments.getHost(), "discriminator");
         final Credentials credentials = clientService.getCredentialsFrom(arguments);

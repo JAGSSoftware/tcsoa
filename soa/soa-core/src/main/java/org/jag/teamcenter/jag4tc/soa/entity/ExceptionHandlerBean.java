@@ -31,7 +31,6 @@ import com.teamcenter.soa.exceptions.CanceledOperationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-// TODO Convertir a objeto Guice
 class ExceptionHandlerBean implements ExceptionHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionHandlerBean.class);

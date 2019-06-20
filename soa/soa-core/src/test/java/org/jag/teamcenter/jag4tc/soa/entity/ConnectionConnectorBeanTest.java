@@ -59,11 +59,9 @@ public class ConnectionConnectorBeanTest {
     @InjectMocks
     private ConnectionConnectorBean underTest;
 
-    // FIXME It should be an object, not a mock
     @Mock
     private ConnectionPoolBean connectionPoolBean;
 
-    // FIXME It should be an object, not a mock
     @Mock
     private SessionServiceProviderBean sessionServiceProviderBean;
 
