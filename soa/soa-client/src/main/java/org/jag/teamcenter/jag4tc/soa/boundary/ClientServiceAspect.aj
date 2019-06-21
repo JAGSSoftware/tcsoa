@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
 
 public aspect ClientServiceAspect {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ClientServiceBF.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClientServiceAspect.class);
     private static final MetricRegistry METRIC_REGISTRY = new MetricRegistry();
     private static final ScheduledReporter REPORTER = Slf4jReporter.forRegistry(METRIC_REGISTRY)
             .outputTo(LOGGER)

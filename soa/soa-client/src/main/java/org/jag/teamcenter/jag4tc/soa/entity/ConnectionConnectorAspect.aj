@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
 
 public aspect ConnectionConnectorAspect {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ConnectionConnector.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConnectionConnectorAspect.class);
     private static final MetricRegistry METRIC_REGISTRY = new MetricRegistry();
     private static final ScheduledReporter REPORTER = Slf4jReporter.forRegistry(METRIC_REGISTRY)
             .outputTo(LOGGER)
