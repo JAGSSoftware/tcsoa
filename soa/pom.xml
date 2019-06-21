@@ -17,13 +17,36 @@
         <module>soa-client</module>
     </modules>
 
+    <properties>
+        <commons-httpclient.version>3.1</commons-httpclient.version>
+        <metrics.version>4.1.0</metrics.version>
+        <aspectj.version>1.8.13</aspectj.version>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>commons-httpclient</groupId>
                 <artifactId>commons-httpclient</artifactId>
-                <version>3.1</version>
+                <version>${commons-httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.dropwizard.metrics</groupId>
+                <artifactId>metrics-core</artifactId>
+                <version>${metrics.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>aspectj-maven-plugin</artifactId>
+                    <version>1.11</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

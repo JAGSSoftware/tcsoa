@@ -25,6 +25,7 @@ package org.jag.teamcenter.jag4tc.soa;
 
 import java.util.Arrays;
 
+import com.codahale.metrics.MetricRegistry;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.jag.teamcenter.jag4tc.soa.boundary.BoundaryClientModule;
@@ -43,6 +44,7 @@ import org.slf4j.LoggerFactory;
 public class Main {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+    private static final MetricRegistry METRICS = new MetricRegistry();
     private final ClientServiceBF clientService;
     private final String[] args;
     private final ConnectionConfigurationFactory connectionConfigurationFactory;
@@ -81,9 +83,11 @@ public class Main {
         connectionConnector.connect(connectionConfiguration, credentials);
         try {
             connectionConnector.login();
-            connectionConnector.logout();
         } catch (SessionLoginException e) {
             LOGGER.info("Exception happened by login", e);
+            return;
         }
+
+        connectionConnector.logout();
     }
 }
