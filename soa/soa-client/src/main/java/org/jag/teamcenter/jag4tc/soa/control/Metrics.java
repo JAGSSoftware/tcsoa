@@ -23,19 +23,15 @@
  */
 package org.jag.teamcenter.jag4tc.soa.control;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.matcher.Matchers;
-import org.jag.teamcenter.jag4tc.soa.entity.ConnectionConnector;
+import com.codahale.metrics.MetricRegistry;
+import com.google.inject.Singleton;
 
-public class ControlClientModule extends AbstractModule {
+@Singleton
+public class Metrics {
 
-    @Override
-    protected void configure() {
-        bind(ArgumentsServiceBA.class).to(ArgumentsService.class);
-        bind(CredentialsServiceBA.class).to(CredentialsService.class);
+    private static final MetricRegistry METRIC_REGISTRY = new MetricRegistry();
 
-        final TimerMetricMethodInterceptor timerMetricMethodInterceptor = new TimerMetricMethodInterceptor();
-        requestInjection(timerMetricMethodInterceptor);
-        bindInterceptor(Matchers.subclassesOf(ConnectionConnector.class), Matchers.any(), timerMetricMethodInterceptor);
+    public MetricRegistry getMetricRegistry() {
+        return METRIC_REGISTRY;
     }
 }
