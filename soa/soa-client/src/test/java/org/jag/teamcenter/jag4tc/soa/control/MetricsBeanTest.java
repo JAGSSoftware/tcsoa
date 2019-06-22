@@ -23,22 +23,22 @@
  */
 package org.jag.teamcenter.jag4tc.soa.control;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.matcher.Matchers;
-import org.jag.teamcenter.jag4tc.soa.entity.ConnectionConnector;
-import org.jag.teamcenter.jag4tc.soa.entity.Intercepted;
+import org.junit.Before;
+import org.junit.Test;
 
-public class ControlClientModule extends AbstractModule {
+import static org.assertj.core.api.Assertions.assertThat;
 
-    @Override
-    protected void configure() {
-        bind(ArgumentsServiceBA.class).to(ArgumentsService.class);
-        bind(CredentialsServiceBA.class).to(CredentialsService.class);
+public class MetricsBeanTest {
 
-        final TimerMetricMethodInterceptor timerMetricMethodInterceptor = new TimerMetricMethodInterceptor();
-        requestInjection(timerMetricMethodInterceptor);
-        bindInterceptor(Matchers.subclassesOf(ConnectionConnector.class),
-                Matchers.annotatedWith(Intercepted.class),
-                timerMetricMethodInterceptor);
+    private MetricsBean underTest;
+
+    @Before
+    public void setUp() {
+        underTest = new MetricsBean();
+    }
+
+    @Test
+    public void getInstance() {
+        assertThat(underTest.getInstance()).isNotNull();
     }
 }

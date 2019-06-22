@@ -24,10 +24,18 @@
 package org.jag.teamcenter.jag4tc.soa.boundary;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.matcher.Matchers;
+import org.jag.teamcenter.jag4tc.soa.control.TimerMetricMethodInterceptor;
+import org.jag.teamcenter.jag4tc.soa.entity.Intercepted;
 
 public class BoundaryClientModule extends AbstractModule {
 
     protected void configure() {
         bind(ClientServiceBF.class).to(ClientService.class);
+
+        final TimerMetricMethodInterceptor timerMetricMethodInterceptor = new TimerMetricMethodInterceptor();
+        requestInjection(timerMetricMethodInterceptor);
+        bindInterceptor(Matchers.subclassesOf(ClientService.class), Matchers.annotatedWith(Intercepted.class),
+                timerMetricMethodInterceptor);
     }
 }

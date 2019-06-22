@@ -21,24 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.jag.teamcenter.jag4tc.soa.control;
+package org.jag.teamcenter.jag4tc.soa.entity;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.matcher.Matchers;
-import org.jag.teamcenter.jag4tc.soa.entity.ConnectionConnector;
-import org.jag.teamcenter.jag4tc.soa.entity.Intercepted;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-public class ControlClientModule extends AbstractModule {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface Intercepted {
 
-    @Override
-    protected void configure() {
-        bind(ArgumentsServiceBA.class).to(ArgumentsService.class);
-        bind(CredentialsServiceBA.class).to(CredentialsService.class);
-
-        final TimerMetricMethodInterceptor timerMetricMethodInterceptor = new TimerMetricMethodInterceptor();
-        requestInjection(timerMetricMethodInterceptor);
-        bindInterceptor(Matchers.subclassesOf(ConnectionConnector.class),
-                Matchers.annotatedWith(Intercepted.class),
-                timerMetricMethodInterceptor);
-    }
 }

@@ -58,6 +58,7 @@ class ConnectionConnectorBean implements ConnectionConnector {
     private RequestListener requestListener;
 
     @Override
+    @Intercepted
     public void connect(final ConnectionConfiguration connectionConfiguration, final Credentials credentials) {
         final Connection tcConnection = new Connection(connectionConfiguration.getHost(),
                 new CredentialManagerBean(credentials, connectionConfiguration.getDiscriminator()),
@@ -81,6 +82,7 @@ class ConnectionConnectorBean implements ConnectionConnector {
     }
 
     @Override
+    @Intercepted
     public void login() throws SessionLoginException {
         final ConnectionBean connectionBean = connectionPool.getConnectionBean();
         final SessionService sessionService = sessionServiceProvider.getService();
@@ -95,6 +97,7 @@ class ConnectionConnectorBean implements ConnectionConnector {
     }
 
     @Override
+    @Intercepted
     public void logout() {
         final SessionService sessionService = sessionServiceProvider.getService();
         try {

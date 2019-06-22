@@ -28,6 +28,7 @@ import org.jag.teamcenter.jag4tc.soa.control.Arguments;
 import org.jag.teamcenter.jag4tc.soa.control.ArgumentsServiceBA;
 import org.jag.teamcenter.jag4tc.soa.control.CredentialsServiceBA;
 import org.jag.teamcenter.jag4tc.soa.entity.Credentials;
+import org.jag.teamcenter.jag4tc.soa.entity.Intercepted;
 
 class ClientService implements ClientServiceBF {
 
@@ -43,6 +44,7 @@ class ClientService implements ClientServiceBF {
     }
 
     @Override
+    @Intercepted
     public Credentials getCredentialsFrom(final Arguments arguments) {
         return credentialsService.getCredentialsFrom(arguments);
     }
