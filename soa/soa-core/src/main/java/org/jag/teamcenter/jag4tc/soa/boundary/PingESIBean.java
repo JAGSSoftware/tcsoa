@@ -23,21 +23,41 @@
  */
 package org.jag.teamcenter.jag4tc.soa.boundary;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.matcher.Matchers;
-import org.jag.teamcenter.jag4tc.soa.control.TimerMetricMethodInterceptor;
-import org.jag.teamcenter.jag4tc.soa.entity.Intercepted;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class BoundaryClientModule extends AbstractModule {
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-    protected void configure() {
-        bind(ClientServiceBF.class).to(ClientService.class);
-        bind(PingESI.class).to(PingESIBean.class);
+class PingESIBean implements PingESI {
 
-        final TimerMetricMethodInterceptor timerMetricMethodInterceptor = new TimerMetricMethodInterceptor();
-        requestInjection(timerMetricMethodInterceptor);
-        bindInterceptor(Matchers.subclassesOf(ClientService.class), Matchers.annotatedWith(Intercepted.class),
-                timerMetricMethodInterceptor);
-        bindInterceptor(Matchers.subclassesOf(PingESI.class), Matchers.any(), timerMetricMethodInterceptor);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PingESIBean.class);
+    private static final Pattern IP_ADDRESS_PATTERN = Pattern.compile(".*//([0-9]*.[0-9]*.[0-9]*.[0-9]*)(:[0-9]*)?.*");
+
+    @Override
+    public boolean ping(final String host) {
+
+        final Matcher ipAddressMatcher = IP_ADDRESS_PATTERN.matcher(host);
+        if (ipAddressMatcher.matches()) {
+            return pingIpAddress(ipAddressMatcher.group(1));
+        }
+
+        return false;
+    }
+
+    private boolean pingIpAddress(final String ipAddress) {
+        try {
+            final InetAddress inet = InetAddress.getByName(ipAddress);
+            LOGGER.debug("Pinging [{}]", ipAddress);
+            return inet.isReachable(5000);
+        } catch (UnknownHostException e) {
+            LOGGER.warn("UnknownException", e);
+        } catch (IOException e) {
+            LOGGER.warn("IOException", e);
+        }
+        return false;
     }
 }
