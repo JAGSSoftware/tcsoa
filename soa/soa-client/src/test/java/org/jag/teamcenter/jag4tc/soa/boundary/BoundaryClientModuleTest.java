@@ -23,20 +23,26 @@
  */
 package org.jag.teamcenter.jag4tc.soa.boundary;
 
-import com.google.inject.matcher.Matchers;
-import org.jag.teamcenter.jag4tc.soa.control.TimerMetricMethodInterceptor;
-import org.jag.teamcenter.jag4tc.soa.entity.Intercepted;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.jag.teamcenter.jag4tc.soa.control.ControlClientModule;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-public class BoundaryClientModule extends BoundaryModule {
+import static org.assertj.core.api.Assertions.assertThat;
 
-    protected void configure() {
-        super.configure();
-        bind(ClientServiceBF.class).to(ClientService.class);
+public class BoundaryClientModuleTest {
 
-        final TimerMetricMethodInterceptor timerMetricMethodInterceptor = new TimerMetricMethodInterceptor();
-        requestInjection(timerMetricMethodInterceptor);
-        bindInterceptor(Matchers.subclassesOf(ClientService.class), Matchers.annotatedWith(Intercepted.class),
-                timerMetricMethodInterceptor);
-        bindInterceptor(Matchers.subclassesOf(PingESI.class), Matchers.any(), timerMetricMethodInterceptor);
+    private static Injector injector;
+
+    @BeforeClass
+    public static void setUpFirst() {
+        injector = Guice.createInjector(new BoundaryClientModule(), new ControlClientModule());
+    }
+
+    @Test
+    public void configure() {
+        assertThat(injector.getInstance(ClientServiceBF.class)).isInstanceOf(ClientService.class);
+        assertThat(injector.getInstance(PingESI.class)).isInstanceOf(PingESIBean.class);
     }
 }
