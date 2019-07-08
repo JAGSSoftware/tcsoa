@@ -43,7 +43,17 @@ public class PingESIBeanTest {
     }
 
     @Test
+    public void pingNotMatchingIpAddress() {
+        assertThat(underTest.ping("")).isFalse();
+    }
+
+    @Test
     public void pingNotReachableIpAddress() {
         assertThat(underTest.ping("http://129.0.0.1:8080/tc")).isFalse();
+    }
+
+    @Test
+    public void pingUnknownHostException() {
+        assertThat(underTest.ping("http://300.300.300.300")).isFalse();
     }
 }

@@ -25,7 +25,6 @@ package org.jag.teamcenter.jag4tc.soa.boundary;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,8 +52,6 @@ class PingESIBean implements PingESI {
             final InetAddress inet = InetAddress.getByName(ipAddress);
             LOGGER.debug("Pinging [{}]", ipAddress);
             return inet.isReachable(5000);
-        } catch (UnknownHostException e) {
-            LOGGER.warn("UnknownException", e);
         } catch (IOException e) {
             LOGGER.warn("IOException", e);
         }
