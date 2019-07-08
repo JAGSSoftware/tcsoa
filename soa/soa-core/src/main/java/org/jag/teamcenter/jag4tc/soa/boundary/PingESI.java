@@ -23,21 +23,7 @@
  */
 package org.jag.teamcenter.jag4tc.soa.boundary;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.matcher.Matchers;
-import org.jag.teamcenter.jag4tc.soa.control.TimerMetricMethodInterceptor;
-import org.jag.teamcenter.jag4tc.soa.entity.Intercepted;
+public interface PingESI {
 
-public class BoundaryClientModule extends AbstractModule {
-
-    protected void configure() {
-        bind(ClientServiceBF.class).to(ClientService.class);
-        bind(PingESI.class).to(PingESIBean.class);
-
-        final TimerMetricMethodInterceptor timerMetricMethodInterceptor = new TimerMetricMethodInterceptor();
-        requestInjection(timerMetricMethodInterceptor);
-        bindInterceptor(Matchers.subclassesOf(ClientService.class), Matchers.annotatedWith(Intercepted.class),
-                timerMetricMethodInterceptor);
-        bindInterceptor(Matchers.subclassesOf(PingESI.class), Matchers.any(), timerMetricMethodInterceptor);
-    }
+    boolean ping(final String host);
 }

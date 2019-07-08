@@ -25,6 +25,7 @@ package org.jag.teamcenter.jag4tc.soa;
 
 import com.teamcenter.schemas.soa._2006_03.exceptions.InvalidCredentialsException;
 import org.jag.teamcenter.jag4tc.soa.boundary.ClientServiceBF;
+import org.jag.teamcenter.jag4tc.soa.boundary.PingESI;
 import org.jag.teamcenter.jag4tc.soa.control.Arguments;
 import org.jag.teamcenter.jag4tc.soa.entity.ConnectionConfiguration;
 import org.jag.teamcenter.jag4tc.soa.entity.ConnectionConfigurationFactory;
@@ -56,12 +57,14 @@ public class MainTest {
     private ConnectionConfigurationFactory connectionConfigurationFactory;
     @Mock
     private ConnectionConnector connectionConnector;
+    @Mock
+    private PingESI pingService;
+
     private final String[] args = {};
 
     @Before
     public void setUp() {
-
-        main = new Main(clientService, args, connectionConfigurationFactory, connectionConnector);
+        main = new Main(args, clientService, connectionConfigurationFactory, connectionConnector, pingService);
     }
 
     @Test
@@ -74,11 +77,13 @@ public class MainTest {
         when(arguments.getHost()).thenReturn("tccs://host");
         when(connectionConfigurationFactory.createConnectionConfiguration(anyString(), anyString()))
                 .thenReturn(connectionConfiguration);
+        when(connectionConfiguration.getHost()).thenReturn("tccs://host");
         when(clientService.getCredentialsFrom(eq(arguments))).thenReturn(credentials);
 
         main.run();
 
         verify(clientService).parse(eq(args));
+        verify(pingService).ping(eq("tccs://host"));
         verify(connectionConnector).connect(eq(connectionConfiguration), eq(credentials));
         verify(connectionConnector).login();
         verify(connectionConnector).logout();
@@ -94,12 +99,14 @@ public class MainTest {
         when(arguments.getHost()).thenReturn("tccs://host");
         when(connectionConfigurationFactory.createConnectionConfiguration(anyString(), anyString()))
                 .thenReturn(connectionConfiguration);
+        when(connectionConfiguration.getHost()).thenReturn("tccs://host");
         when(clientService.getCredentialsFrom(eq(arguments))).thenReturn(credentials);
         doThrow(new SessionLoginException(credentials, new InvalidCredentialsException("Fake exception")))
                 .when(connectionConnector).login();
 
         main.run();
 
+        verify(pingService).ping(eq("tccs://host"));
         verify(connectionConnector).connect(eq(connectionConfiguration), eq(credentials));
         verify(connectionConnector).login();
         verify(connectionConnector, never()).logout();
@@ -116,6 +123,7 @@ public class MainTest {
 
         verify(connectionConfigurationFactory, never()).createConnectionConfiguration(anyString(), anyString());
         verify(clientService, never()).getCredentialsFrom(any(Arguments.class));
+        verify(pingService, never()).ping(eq("tccs://host"));
         verify(connectionConnector, never()).connect(eq(connectionConfiguration), eq(credentials));
         verify(connectionConnector, never()).login();
         verify(connectionConnector, never()).logout();

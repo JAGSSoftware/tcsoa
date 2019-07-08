@@ -23,21 +23,27 @@
  */
 package org.jag.teamcenter.jag4tc.soa.boundary;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.matcher.Matchers;
-import org.jag.teamcenter.jag4tc.soa.control.TimerMetricMethodInterceptor;
-import org.jag.teamcenter.jag4tc.soa.entity.Intercepted;
+import org.junit.Before;
+import org.junit.Test;
 
-public class BoundaryClientModule extends AbstractModule {
+import static org.assertj.core.api.Assertions.assertThat;
 
-    protected void configure() {
-        bind(ClientServiceBF.class).to(ClientService.class);
-        bind(PingESI.class).to(PingESIBean.class);
+public class PingESIBeanTest {
 
-        final TimerMetricMethodInterceptor timerMetricMethodInterceptor = new TimerMetricMethodInterceptor();
-        requestInjection(timerMetricMethodInterceptor);
-        bindInterceptor(Matchers.subclassesOf(ClientService.class), Matchers.annotatedWith(Intercepted.class),
-                timerMetricMethodInterceptor);
-        bindInterceptor(Matchers.subclassesOf(PingESI.class), Matchers.any(), timerMetricMethodInterceptor);
+    private PingESIBean underTest;
+
+    @Before
+    public void setUp() {
+        underTest = new PingESIBean();
+    }
+
+    @Test
+    public void pingIpAddress() {
+        assertThat(underTest.ping("http://127.0.0.1:8080/tc")).isTrue();
+    }
+
+    @Test
+    public void pingNotReachableIpAddress() {
+        assertThat(underTest.ping("http://129.0.0.1:8080/tc")).isFalse();
     }
 }
