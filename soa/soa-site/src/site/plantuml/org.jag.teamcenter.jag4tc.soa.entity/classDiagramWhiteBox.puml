@@ -1,0 +1,122 @@
+@startuml
+skinparam class {
+    BackgroundColor #99D9EA
+    BorderColor black
+    ArrowColor black
+}
+
+namespace com.teamcenter.soa.client {
+    class Connection
+    interface ExceptionHandler
+    interface RequestListener
+    interface CredentialManager
+
+    namespace model {
+        class ModelEventListener
+        interface PartialErrorListener
+    }
+}
+
+namespace org.jag.teamcenter.jag4tc.soa.entity {
+    interface ConnectionConfiguration {
+        +getHost():String
+        +getDiscriminator():String
+        +getProtocol():Protocol
+    }
+    class AbstractConnectionConfiguration <<abstract>>
+    class HttpConnectionConfiguration
+    class IiopConnectionConfiguration
+    class TccsConnectionConfiguration
+
+    class ConnectionBean {
+        -discriminator:String
+    }
+
+    interface ConnectionConfigurationFactory {
+        +createConnectionConfiguration(host:String, discriminator:String):ConnectionConfiguration
+    }
+    class ConnectionConfigurationFactoryBean
+
+    interface ConnectionConnector {
+        +connect(:ConnectionConfiguration, :Credentials)
+        +login()
+        +logout()
+    }
+    class ConnectionConnectorBean
+
+    class ConnectionPoolBean <<singleton>>
+
+    class CredentialManagerBean
+
+    interface Credentials {
+        +getUsername():String
+        +getPassword():String
+        +getGroup():String
+        +getRole():String
+    }
+
+    class ExceptionHandlerBean
+    class ModelEventListenerBean
+    class PartialErrorListenerBean
+    class RequestListenerBean
+
+    class SessionLoginException <<exception>>
+
+    class SessionServiceProviderBean #99D9EA
+
+    enum Protocol {
+        HTTP
+        TCCS
+        IIOP
+    }
+
+
+    ConnectionConfiguration <|.. AbstractConnectionConfiguration
+
+    Credentials <-- ConnectionBean
+    com.teamcenter.soa.client.Connection <-- ConnectionBean
+
+    Protocol <.. ConnectionConfiguration
+
+    ConnectionConfiguration <.. ConnectionConfigurationFactory
+
+    ConnectionConfigurationFactory <|.. ConnectionConfigurationFactoryBean
+
+    Credentials <.. ConnectionConnector
+    ConnectionConfiguration <.. ConnectionConnector
+    SessionLoginException <.. ConnectionConnector
+
+    ConnectionConnector <|.. ConnectionConnectorBean
+    ConnectionPoolBean <-- ConnectionConnectorBean
+    SessionServiceProviderBean <-- ConnectionConnectorBean
+    com.teamcenter.soa.client.ExceptionHandler <-- ConnectionConnectorBean
+    com.teamcenter.soa.client.model.PartialErrorListener <-- ConnectionConnectorBean
+    com.teamcenter.soa.client.model.ModelEventListener <-- ConnectionConnectorBean
+    com.teamcenter.soa.client.RequestListener <-- ConnectionConnectorBean
+    ConnectionConfiguration <.. ConnectionConnectorBean
+    Credentials <.. ConnectionConnectorBean
+
+    ConnectionBean <-- ConnectionPoolBean
+
+    Credentials <-- CredentialManagerBean
+    com.teamcenter.soa.client.CredentialManager <|-- CredentialManagerBean
+
+    com.teamcenter.soa.client.ExceptionHandler <|.. ExceptionHandlerBean
+
+    AbstractConnectionConfiguration <|-- HttpConnectionConfiguration
+    AbstractConnectionConfiguration <|-- IiopConnectionConfiguration
+
+    com.teamcenter.soa.client.model.ModelEventListener <|-- ModelEventListenerBean
+    com.teamcenter.soa.client.model.PartialErrorListener <|.. PartialErrorListenerBean
+    com.teamcenter.soa.client.RequestListener <|.. RequestListenerBean
+
+    Credentials <.. SessionLoginException
+
+    ConnectionPoolBean <.. SessionServiceProviderBean
+
+    AbstractConnectionConfiguration <|-- TccsConnectionConfiguration
+}
+
+
+
+@enduml

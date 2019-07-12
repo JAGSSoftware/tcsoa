@@ -25,7 +25,7 @@ package org.jag.teamcenter.jag4tc.soa.entity;
 
 import com.teamcenter.soa.SoaConstants;
 
-public enum Protocol {
+enum Protocol {
     HTTP(SoaConstants.HTTP),
     TCCS(SoaConstants.TCCS),
     IIOP(SoaConstants.IIOP);

@@ -28,12 +28,8 @@ import com.teamcenter.services.strong.core.SessionService;
 
 class SessionServiceProviderBean {
 
-    private final ConnectionPoolBean connectionPool;
-
     @Inject
-    SessionServiceProviderBean(final ConnectionPoolBean connectionPool) {
-        this.connectionPool = connectionPool;
-    }
+    private ConnectionPoolBean connectionPool;
 
     public SessionService getService() {
         return SessionService.getService(connectionPool.getConnectionBean().getConnection());

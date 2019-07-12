@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/DECORATION/1.8.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd"
+         name="${project.name}">
+    <body>
+        <menu name="Project">
+            <item name="Index" href="index.html"/>
+
+            <item name="arc42 Documentation" href="arc42_Documentation/about-arc42.html">
+                <item name="1. Introduction and goals" href="arc42_Documentation/01_introduction_and_goals.html"/>
+                <item name="2. Architecture constraints" href="arc42_Documentation/02_architecture_constraints.html"/>
+                <item name="3. System scope and context" href="arc42_Documentation/03_system_scope_and_context.html"/>
+                <item name="4. Solution strategy" href="arc42_Documentation/04_solution_strategy.html"/>
+                <item name="5. Build block view" href="arc42_Documentation/05_building_block_view.html"/>
+                <item name="6. Runtime view" href="arc42_Documentation/06_runtime_view.html"/>
+                <item name="7. Deployment view" href="arc42_Documentation/07_deployment_view.html"/>
+                <item name="8. Concepts" href="arc42_Documentation/08_concepts.html"/>
+                <item name="9. Design decisions" href="arc42_Documentation/09_design_decisions.html"/>
+                <item name="10. Quality scenarios" href="arc42_Documentation/10_quality_scenarios.html"/>
+                <item name="11. Technical risks" href="arc42_Documentation/11_technical_risks.html"/>
+                <item name="12. Glossary" href="arc42_Documentation/12_glossary.html"/>
+            </item>
+        </menu>
+
+        <!-- Make sure we still add regular reports -->
+        <menu ref="reports"/>
+
+    </body>
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.7</version>
+    </skin>
+    <custom>
+        <fluidoSkin>
+            <profile>sandbox</profile>
+            <sideBarEnabled>true</sideBarEnabled>
+            <copyrightClass>pull-right</copyrightClass>
+        </fluidoSkin>
+    </custom>
+</project>

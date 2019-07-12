@@ -26,7 +26,7 @@ package org.jag.teamcenter.jag4tc.soa.entity;
 import com.google.inject.Singleton;
 
 @Singleton
-public class ConnectionPoolBean {
+class ConnectionPoolBean {
 
     private ConnectionBean connectionBean;
 

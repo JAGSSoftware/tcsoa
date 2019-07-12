@@ -15,6 +15,7 @@
     <modules>
         <module>soa-core</module>
         <module>soa-client</module>
+        <module>soa-site</module>
     </modules>
 
     <properties>
