@@ -21,12 +21,12 @@
                 <version>1.2</version>
                 <configuration>
                     <sourceFiles>
-                        <directory>${basedir}/src/site/plantuml</directory>
+                        <directory>${basedir}/src/site</directory>
                         <includes>
                             <include>**/*.puml</include>
                         </includes>
                     </sourceFiles>
-                    <outputDirectory>${basedir}/src/site/images</outputDirectory>
+                    <outputDirectory>${project.build.directory}/site</outputDirectory>
                     <outputInSourceDirectory>false</outputInSourceDirectory>
                     <verbose>false</verbose>
                 </configuration>
@@ -46,20 +46,59 @@
                     </execution>
                 </executions>
             </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.asciidoctor</groupId>-->
+<!--                <artifactId>asciidoctor-maven-plugin</artifactId>-->
+<!--                <version>1.5.6</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>output-html</id>-->
+<!--                        <phase>generate-resources</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>process-asciidoc</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <configuration>-->
+<!--                    <sourceDirectory>${basedir}/src/site/asciidoc</sourceDirectory>-->
+<!--                    <outputDirectory>${project.build.directory}/site</outputDirectory>-->
+<!--                    <preserveDirectories>true</preserveDirectories>-->
+<!--                    <backend>html</backend>-->
+<!--                    <resources></resources>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7.1</version>
+                <configuration>
+                    <asciidoc>
+                        <attributes>
+                            <imagesdir>../images</imagesdir>
+                        </attributes>
+                    </asciidoc>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctor-maven-plugin</artifactId>
+                        <version>1.5.6</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
         </plugins>
     </build>
 
     <reporting>
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
                 <reportSets>
                     <reportSet>
                         <reports>
-                            <report>summary</report>
-<!--                            <report>project-team</report>-->
-<!--                            <report>license</report>-->
+                            <!-- Here can come as reports: summary, team, plugins, etc. -->
                         </reports>
                     </reportSet>
                 </reportSets>
