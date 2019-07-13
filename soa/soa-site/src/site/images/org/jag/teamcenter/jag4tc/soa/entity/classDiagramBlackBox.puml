@@ -1,0 +1,34 @@
+@startuml
+skinparam class {
+    BackgroundColor #99D9EA
+    BorderColor black
+    ArrowColor black
+}
+
+package org.jag.teamcenter.jag4tc.soa.entity <<Frame>> {
+    interface ConnectionConfiguration {
+        +getHost():String
+        +getDiscriminator():String
+        +getProtocol():Protocol
+    }
+
+    interface ConnectionConfigurationFactory {
+        +createConnectionConfiguration(host:String, discriminator:String):ConnectionConfiguration
+    }
+
+    interface ConnectionConnector() {
+        +connect(:ConnectionConfiguration, :Credentials)
+        +login()
+        +logout()
+    }
+
+    interface Credentials {
+        +getUsername():String
+        +getPassword():String
+        +getGroup():String
+        +getRole():String
+    }
+
+    class SessionLoginException <<exception>>
+}
+@enduml
