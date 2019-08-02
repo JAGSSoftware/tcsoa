@@ -1,0 +1,41 @@
+@startuml
+skinparam class {
+    BackgroundColor #99D9EA
+    BorderColor black
+    ArrowColor black
+}
+
+namespace com.teamcenter.soa.client {
+    class Connection
+    interface ExceptionHandler
+    interface CredentialManager
+    interface RequestListener
+
+    namespace model {
+        class ModelEventListener
+        interface PartialErrorListener
+    }
+}
+
+namespace org.jag.teamcenter.jag4tc.soa.entity {
+    class ConnectionBean
+    class ExceptionHandlerBean
+    class ConnectionConnectorBean
+    class CredentialManagerBean
+    class RequestListenerBean
+    class ModelEventListenerBean
+    class PartialErrorListenerBean
+
+    com.teamcenter.soa.client.Connection <-- ConnectionBean
+    com.teamcenter.soa.client.ExceptionHandler <|.. ExceptionHandlerBean
+    com.teamcenter.soa.client.ExceptionHandler <-- ConnectionConnectorBean
+    com.teamcenter.soa.client.CredentialManager <|.. CredentialManagerBean
+    com.teamcenter.soa.client.RequestListener <|.. RequestListenerBean
+    com.teamcenter.soa.client.RequestListener <-- ConnectionConnectorBean
+    com.teamcenter.soa.client.model.ModelEventListener <|-- ModelEventListenerBean
+    com.teamcenter.soa.client.model.ModelEventListener <-- ConnectionConnectorBean
+    com.teamcenter.soa.client.model.PartialErrorListener <|-- PartialErrorListenerBean
+    com.teamcenter.soa.client.model.PartialErrorListener <-- ConnectionConnectorBean
+}
+
+@enduml

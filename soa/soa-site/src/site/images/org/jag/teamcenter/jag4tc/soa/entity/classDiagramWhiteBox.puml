@@ -23,7 +23,7 @@ namespace org.jag.teamcenter.jag4tc.soa.entity {
         +getDiscriminator():String
         +getProtocol():Protocol
     }
-    class AbstractConnectionConfiguration <<abstract>>
+    abstract AbstractConnectionConfiguration
     class HttpConnectionConfiguration
     class IiopConnectionConfiguration
     class TccsConnectionConfiguration

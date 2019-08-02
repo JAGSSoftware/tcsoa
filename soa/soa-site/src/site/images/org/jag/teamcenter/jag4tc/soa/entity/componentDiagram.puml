@@ -1,0 +1,6 @@
+@startuml
+
+[soa-core-api] <|.. [soa-core]
+[soa-core-api] <-- [soa-client]
+
+@enduml
